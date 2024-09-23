@@ -1,0 +1,91 @@
+<div class="loader"
+*ngIf="loader.isLoading|async"
+><div class="lds-facebook"><div></div><div></div><div></div></div>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Patient</li>
+      <li class="breadcrumb-item active" aria-current="page">Appointments</li>
+    </ol>
+  </nav>
+
+<div class="d-flex row  doctor p-5 mb-5">
+  <div class="d-flex justify-content-between border-bottom p-2">
+    <span>Doctor name</span>
+    <span>Location</span>
+    <span>Date</span>
+    <span>Status</span>
+
+  </div>
+  <div class="appointment d-flex justify-content-between  p-2" *ngFor="let app of appointments; let x=index" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + x">
+    <span>{{app.doctorName}}</span>
+    <span>{{app.location}}</span>
+    <span>
+      {{app.appDay}}
+    </span>
+    <span>
+      {{app.appointmentStatus}}
+    </span>
+
+  </div>
+</div>
+
+
+                          <!-- booking popup -->
+
+                          <div *ngFor="let timeRange of appointments; let x=index" class="modal fade" id="exampleModal{{x}}" tabindex="-1" [attr.aria-labelledby]="'exampleModalLabel' + x" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel{{x}}">Appointment detials</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                  <div>
+                                    <div class=" d-flex align-items-center">
+                                      <span class="label">Doctor name:</span>
+                                      <span>{{timeRange.doctorName}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                      <span class="label">Location:</span>
+                                      <span>{{timeRange.location}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                      <span class="label">Date:</span>
+                                      <span>{{timeRange.appDay}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                      <span class="label">Status:</span>
+                                      <span>{{timeRange.appointmentStatus}}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                      <span class="label">Booking for other one:</span>
+                                      <span>{{ timeRange.bookingToOther ? 'Yes' : 'No' }}</span>
+                                    </div>
+
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" >Ignore</button>
+                                  <button (click)="cancel(timeRange)" type="button" class="btn bg-danger btn-primary" data-bs-dismiss="modal" >Cancel it</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                              <!-- toast test -->
+    <div
+    [ngStyle]="reviewed?{'z-index':'5','opacity':'1'}:{'z-index':'-5','opacity':'0'}"
+    class="toasttest toast align-items-center">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{revMessage}}
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+    <!-- end toast test -->

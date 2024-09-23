@@ -1,0 +1,250 @@
+<div class="d-flex row">
+    <div class="sideLeft col-4 col d-none d-sm-flex">
+      <div class="d-flex align-items-center">
+        <img style="width:105px;margin-top: 0;" class="logo" src="assets/Logo.png" alt="Logo">
+        <h1 class="custom-font">
+        <span class="Alzheimer-color">
+        Alzheimer</span> disease
+        </h1>
+      </div>
+      <img src="assets/Welcome.png" alt="Error">
+    </div>
+
+    <div class="col-lg-8 col-md-8 col-sm-12 flex-column d-flex align-items-center justify-content-center">
+      <h4>Welcome!</h4>
+      <p class="Please">Please, enter your details</p>
+      <form [formGroup]="register" class="col-lg-4 col-md-8 col-sm-8" (ngSubmit)="registerNewAccount()">
+
+        <div *ngIf="firstPage" class="input-group mb-2">
+          <i class="bi bi-person"
+          [ngClass]="{'iInvalid':register.controls['name'].invalid&&register.controls['name'].touched,'iValid':register.controls['name'].valid}"
+
+          ></i>
+          <input type="text" class=" is-invalid" name="name"  placeholder="Name" aria-describedby="validationName" required formControlName="name"
+          [ngClass]="{'inputInvalid':register.controls['name'].invalid&&register.controls['name'].touched,'inputValid':register.controls['name'].valid}"
+          >
+          <div id="validationName" class="invalid-feedback">
+            <p *ngIf="register.controls['name'].value===''&& register.controls['name'].touched" class="mb-0">
+              * Name is required.
+            </p>
+            <p *ngIf="register.controls['name'].invalid&&register.controls['name'].value!==''&& register.controls['name'].touched" class="mb-0">
+             * Must be more than two characters.
+            </p>
+
+          </div>
+        </div>
+
+
+        <div *ngIf="firstPage" class="input-group mb-2">
+          <i class="bi bi-envelope"
+          [ngClass]="{'iInvalid':register.controls['email'].invalid&&register.controls['email'].touched,'iValid':register.controls['email'].valid}"
+
+          ></i>
+          <input type="email"  placeholder="Email" class=" is-invalid" name="email" aria-describedby="validationEmail" required formControlName="email"
+          [ngClass]="{'inputInvalid':register.controls['email'].invalid&&register.controls['email'].touched,'inputValid':register.controls['email'].valid}"
+          >
+          <div id="validationEmail" class="invalid-feedback">
+            <p *ngIf="register.controls['email'].value===''&& register.controls['email'].touched" class="mb-0">
+              * Email is required.
+            </p>
+            <p *ngIf="register.controls['email'].invalid&&register.controls['email'].value!==''&& register.controls['email'].touched" class="mb-0">
+             * Must be a valid email.
+            </p>
+
+          </div>
+        </div>
+
+
+
+
+        <div *ngIf="firstPage" class="input-group mb-2">
+          <svg class="svg-inline--fa fa-lock"
+          [ngClass]="{'iInvalid':register.controls['password'].invalid&&register.controls['password'].touched,'iValid':register.controls['password'].valid}"
+
+           aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg>
+
+          <input [type]="showPassword ? 'text' : 'password'"  placeholder="Password" class=" is-invalid" name="password" aria-describedby="validationPassword" required formControlName="password"
+          [ngClass]="{'inputInvalid':register.controls['password'].invalid&&register.controls['password'].touched,'inputValid':register.controls['password'].valid}"
+          >
+
+          <i class="bi bi-eye" style="left: 90%;" *ngIf="!showPassword" (click)="togglePasswordVisibility()"
+          [ngClass]="{'iInvalid':register.controls['password'].invalid&&register.controls['password'].touched,'iValid':register.controls['password'].valid}"
+
+          ></i>
+          <i class="bi bi-eye-slash" style="left: 90%;" *ngIf="showPassword" (click)="togglePasswordVisibility()"
+          [ngClass]="{'iInvalid':register.controls['password'].invalid&&register.controls['password'].touched,'iValid':register.controls['password'].valid}"
+
+          ></i>
+
+          <div id="validationPassword" class="invalid-feedback">
+            <p *ngIf="register.controls['password'].value===''&& register.controls['password'].touched" class="mb-0">
+              * Password is required.
+            </p>
+            <p *ngIf="register.controls['password'].invalid&&register.controls['password'].value!==''&& register.controls['password'].touched" class="mb-0">
+             * Must have characters and numbers, be at least 8 characters long, and include uppercase (A-Z), lowercase (a-z), numbers (0-9), and special characters.
+
+            </p>
+
+          </div>
+        </div>
+
+
+
+        <div *ngIf="firstPage" class="input-group mb-2">
+          <svg class="svg-inline--fa fa-lock"
+          [ngClass]="{'iInvalid':register.controls['confirmPassword'].value!=register.controls['password'].value&&register.controls['confirmPassword'].touched||(register.controls['confirmPassword'].value===register.controls['password'].value&&register.controls['confirmPassword'].touched&&register.controls['password'].invalid),
+          'iValid': register.controls['confirmPassword'].value===register.controls['password'].value && register.controls['confirmPassword'].touched&&register.controls['password'].valid}"
+
+           aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg>
+
+          <input [type]="showConfirmPassword ? 'text' : 'password'"  placeholder="Confirm password" class=" is-invalid" name="confirmPassword" aria-describedby="validationConfirmPassword" required formControlName="confirmPassword"
+          [ngClass]="{'inputInvalid':register.controls['confirmPassword'].value!=register.controls['password'].value&&register.controls['confirmPassword'].touched||(register.controls['confirmPassword'].value===register.controls['password'].value&&register.controls['confirmPassword'].touched&&register.controls['password'].invalid),
+          'inputValid': register.controls['confirmPassword'].value===register.controls['password'].value && register.controls['confirmPassword'].touched&&register.controls['password'].valid}">
+
+
+
+          <i class="bi bi-eye" style="left: 90%;" *ngIf="!showConfirmPassword" (click)="toggleConfirmPasswordVisibility()"
+          [ngClass]="{'iInvalid':register.controls['confirmPassword'].value!=register.controls['password'].value&&register.controls['confirmPassword'].touched||(register.controls['confirmPassword'].value===register.controls['password'].value&&register.controls['confirmPassword'].touched&&register.controls['password'].invalid),
+          'iValid': register.controls['confirmPassword'].value===register.controls['password'].value && register.controls['confirmPassword'].touched&&register.controls['password'].valid}"
+         ></i>
+          <i class="bi bi-eye-slash" style="left: 90%;" *ngIf="showConfirmPassword" (click)="toggleConfirmPasswordVisibility()"
+          [ngClass]="{'iInvalid':register.controls['confirmPassword'].value!=register.controls['password'].value&&register.controls['confirmPassword'].touched||(register.controls['confirmPassword'].value===register.controls['password'].value&&register.controls['confirmPassword'].touched&&register.controls['password'].invalid),
+          'iValid': register.controls['confirmPassword'].value===register.controls['password'].value && register.controls['confirmPassword'].touched&&register.controls['password'].valid}"
+
+          ></i>
+
+          <div id="validationConfirmPassword" class="invalid-feedback">
+            <p *ngIf="register.controls['confirmPassword'].value===''&& register.controls['confirmPassword'].touched&&register.controls['password'].value!=''" class="mb-0">
+              * Confirm password is required
+            </p>
+            <p *ngIf="register.controls['confirmPassword'].value===''&& register.controls['confirmPassword'].touched&&register.controls['password'].value===''&& register.controls['password'].touched" class="mb-0">
+              * Confirm password is required and password
+            </p>
+            <p *ngIf="register.controls['confirmPassword'].value===''&& register.controls['confirmPassword'].touched&&register.controls['password'].value!=''&&register.controls['password'].invalid" class="mb-0">
+              * Confirm password is required and password is invalid
+            </p>
+            <p *ngIf="register.controls['password'].value!= register.controls['confirmPassword'].value&&register.controls['confirmPassword'].touched&& register.controls['password'].valid" class="mb-0">
+             *It doesn't match the password.
+            </p>
+            <p *ngIf="(register.controls['password'].value!= register.controls['confirmPassword'].value)&&(register.controls['password'].invalid&&register.controls['password'].touched)" class="mb-0">
+              *It doesn't match the password and password is invalid.
+             </p>
+            <p *ngIf="(register.controls['password'].value===register.controls['confirmPassword'].value&&register.controls['password'].value!=''&& register.controls['confirmPassword'].value!='')&&(register.controls['password'].invalid&&register.controls['password'].touched)" class="mb-0">
+              *It match with the password but,the password is invalid.
+             </p>
+
+          </div>
+        </div>
+
+
+
+
+        <div *ngIf="firstPage" class="input-group mb-2">
+
+          <svg class="svg-inline--fa fa-calendar-days" style="right: 10px;left: auto;pointer-events: none;"
+          [ngClass]="{'iInvalid':register.controls['DOB'].invalid&&register.controls['DOB'].touched,'iValid':register.controls['DOB'].valid}"
+
+           aria-hidden="true" focusable="false" data-prefix="far" data-icon="calendar-days" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z"></path></svg>
+
+
+          <input type="date" id="dateInput"  placeholder="Date of birth" class=" is-invalid" name="DOB" aria-describedby="validationDOB" required formControlName="DOB"
+          [ngClass]="{'inputInvalid':register.controls['DOB'].invalid&&register.controls['DOB'].touched,'inputValid':register.controls['DOB'].valid}"
+          >
+          <div id="validationDOB" class="invalid-feedback">
+            <p *ngIf="register.controls['DOB'].value===''&& register.controls['DOB'].touched" class="mb-0">
+              * Date of birth is required
+            </p>
+            <p *ngIf="register.controls['DOB'].invalid&&register.controls['DOB'].value!==''&& register.controls['DOB'].touched" class="mb-0">
+             * Must be 11 characters long.
+            </p>
+
+          </div>
+        </div>
+
+
+        <div *ngIf="firstPage" class="input-group mb-2">
+          <i class="bi bi-telephone"
+          [ngClass]="{'iInvalid':register.controls['phone'].invalid&&register.controls['phone'].touched,'iValid':register.controls['phone'].valid}"
+
+          ></i>
+          <input type="number"  placeholder="Phone" class=" is-invalid" name="phone" aria-describedby="validationPhone" required formControlName="phone"
+          [ngClass]="{'inputInvalid':register.controls['phone'].invalid&&register.controls['phone'].touched,'inputValid':register.controls['phone'].valid}"
+          >
+          <div id="validationPhone" class="invalid-feedback">
+            <p *ngIf="register.controls['phone'].value===''&& register.controls['phone'].touched" class="mb-0">
+              * Date of birth is required
+            </p>
+            <p *ngIf="register.controls['phone'].invalid&&register.controls['phone'].value!==''&& register.controls['phone'].touched" class="mb-0">
+             * Must be a valid email
+            </p>
+
+          </div>
+        </div>
+        <div *ngIf="secondPage" class="input-group mb-5">
+          <div style="width: 100%;">
+            <div class="drag-drop-container " (drop)="onDrop($event)" (dragover)="onDragOver($event)"  style="padding:40px;border-color: var(--icon-color);font-weight: 700;">
+            <i *ngIf="!fileAsBase64" class="bi bi-cloud-arrow-up text-center w-100" style="font-size: 26px;margin: auto;color:var(--icon-color);"></i>
+            <label *ngIf="!fileAsBase64"  for="poster" style="color: blue;text-align: center;cursor:pointer">  Search for certification </label>
+            <input hidden type="file"  name="poster" id="poster"  accept="image/*" placeholder="" (change)="onchange($event)">
+            <div *ngIf="!fileAsBase64" class="divider-wrapper col-lg-4 col-md-8 col-sm-8"><span class="divider">Or</span></div>
+            <span  *ngIf="!fileAsBase64" style="margin: auto;color:var(--icon-color);"
+            >Drag and drop certification  </span>
+
+            <div  class="position-relative">
+              <img src="{{fileAsBase64}}" alt="" style="width: 100%; max-width: 200px;">
+                <i (click)="removeImage()" class="bi bi-x" style="right: 5px;left:auto;color:white;"></i>
+
+            </div>
+                        <div>
+
+            </div>
+            </div>
+
+        </div>
+      </div>
+        <div *ngIf="!firstPage" class="input-group mb-2">
+          <p>spicialization</p>
+        </div>
+        <div *ngIf="secondPage" class="input-group mb-5">
+        <app-select-list  style="width: 100%;" [receivedData]="selectInputs" [mode]="false" [Mode]="mode" (sendData)="handleSelectedData($event)"></app-select-list>
+        </div>
+        <div>
+          <p *ngIf="Message!=''" class="mb-2 text-center" style="color: red;">
+            *{{Message}}
+          </p>
+
+        </div>
+        <div class="d-flex justify-content-between">
+          <button *ngIf="!firstPage"  (click)="prev()" class="registerButton" style="width: 48%;">prev</button>
+          <button *ngIf="firstPage" (click)="next()" class="registerButton">Next</button>
+          <button *ngIf="!firstPage" (click)="registerNewAccount()" class="registerButton" style="width: 48%;">Register now</button>
+        </div>
+
+
+      </form>
+      <p>Already have an account?
+        <a routerLink="/login" style="color: var(--color_1);">Login</a>
+      </p>
+      <div class="divider-wrapper col-lg-4 col-md-8 col-sm-8"><span class="divider">Or</span></div>
+      <div class="col-lg-4 col-md-8 col-sm-8 position-relative">
+      <div class="g-signin2 " data-onsuccess="onSignIn">
+      </div>
+      <p style="position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: 100%;
+      text-align: center;
+      font-weight: 500;
+      pointer-events: none;
+  ">Continue with Google</p>
+
+    </div>
+  </div>
+
+
+
+
+  <div class="loader"
+*ngIf="loader.isLoading|async"
+><div class="lds-facebook"><div></div><div></div><div></div></div>
+</div>

@@ -1,0 +1,130 @@
+.sideLeft{
+  height: 100vh;
+  background: var(--sider-color);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--sider-shadow);
+}
+.sideLeft h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--color_5);
+}
+.logo{width: 60px;}
+.Alzheimer-color {
+  color: var(--color_3);
+}
+
+hr{
+  color: var(--hr);
+}
+
+li{
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.5s ease;
+    width: 100%;
+  display: flex;
+}
+.icon{
+  color: var(--color_5);
+  width: 20px;
+  transition: all 0.2s ease;
+
+  margin-right: 18px;
+}
+li:hover >p{
+  color: var(--color_2);
+}
+li:hover > .icon{
+  color: var(--color_2);
+}
+p {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+.active{
+  color: var(--color_2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 425px) and (max-width: 642px){
+  /* Extra small devices (phones) */
+  .custom-font {
+    font-size: 13px; /* Adjust the font size for extra small screens */
+  }
+  .logo{
+    width: 60px!important;
+  }
+}
+@media (min-width: 642px) and (max-width: 754px){
+/* Extra small devices (phones) */
+.custom-font {
+  font-size: 14px; /* Adjust the font size for extra small screens */
+}
+.logo{
+  width: 70px!important;
+}
+}
+@media (min-width: 754px) and (max-width: 874px) {
+/* Small devices (tablets) */
+.custom-font {
+  font-size: 13px; /* Adjust the font size for small screens */
+}
+.logo{
+  width: 60px!important;
+}
+}
+@media (min-width: 874px) and (max-width: 992px) {
+/* Medium devices (desktops) */
+.custom-font {
+  font-size: 16px; /* Adjust the font size for medium screens */
+}
+.logo{
+  width: 70!important;
+}
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+/* Large devices (large desktops) */
+.custom-font {
+  font-size: 11px; /* Adjust the font size for large screens */
+}
+.logo{
+  width: 50px!important;
+}
+}
+
+@media (min-width: 1100px) and (max-width: 1200px) {
+/* Large devices (large desktops) */
+.custom-font {
+  font-size: 12px; /* Adjust the font size for large screens */
+}
+.logo{
+  width: 55px!important;
+}
+}
+@media (min-width: 1200px) {
+/* Large devices (large desktops) */
+.custom-font {
+  font-size: 14px; /* Adjust the font size for large screens */
+}
+}
+.row{
+  --bs-gutter-x:0!important;
+}

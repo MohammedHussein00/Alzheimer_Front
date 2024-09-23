@@ -1,0 +1,96 @@
+.container{
+    background-color: var(--background-base)!important;
+      box-shadow: 1px 7px 6px 7px #00000040;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #0298a0;
+  }
+
+  .profile-button {
+    background: #0298a0;
+    box-shadow: none;
+    border: none
+  }
+  input::placeholder,textarea::placeholder{
+    color:var(--icon-color);
+  }
+  textarea{
+    border-bottom-left-radius:0 ;
+    border-bottom-right-radius:0 ;
+  }
+input,textarea{
+  background:inherit;
+  border:1px solid var(--icon-color);
+}
+
+input:focus,textarea:focus{
+  background:inherit;
+  color:var(--icon-color);
+
+}
+.breadcrumb-item+.breadcrumb-item::before{
+  color: var(--icon-color);
+}
+label{
+  color:var(--icon-color);
+}
+  .profile-button:hover {
+    background: #682773
+  }
+
+  .profile-button:focus {
+    background: #682773;
+    box-shadow: none
+  }
+
+  .profile-button:active {
+    background: #682773;
+    box-shadow: none
+  }
+
+  .back:hover {
+    color: #682773;
+    cursor: pointer
+  }
+
+  .labels {
+    font-size: 11px
+  }
+
+  .add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+  }
+
+
+
+
+  .image-container:hover .camera-icon {
+    display: block;
+    color: white; /* Color of the camera icon */
+    font-size: 24px; /* Size of the camera icon */
+    pointer-events: none; /* Prevent the icon from interfering with clicking the image */
+}
+.bi-camera{
+  width: 100%;
+    height: 100%;
+    font-size: 85px;
+    /* opacity: .5; */
+    background: #00000069;
+    color: #ffffff;
+    left: 0;
+    border-radius: 50%;
+    position: absolute;
+    display: none;
+    cursor: pointer;
+}
+.poster:hover > .bi-camera{
+  display: inline;
+}
+.bi-pencil-square:hover{
+  color: blue!important;
+}

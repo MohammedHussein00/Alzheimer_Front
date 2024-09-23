@@ -1,0 +1,17 @@
+#h1Welcome {
+    background-color: cyan;
+    color: maroon;
+    text-align: center;
+}
+
+p {
+    background-color: lightgray;
+    color: blue;
+    border: 2px solid darkorange
+}
+
+.abc {
+    font-size: 48px;
+    font-weight: bold;
+    color: red;
+}

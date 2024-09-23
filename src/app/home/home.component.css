@@ -1,0 +1,39 @@
+
+.main{
+  background-color: var(--main-class-color);
+}
+
+
+
+
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fadeInAnimation {
+    animation: fadeIn 1s ease forwards;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .row{
+    --bs-gutter-x:0!important;
+  }
+     /*
+     ////////////////////////
+     media
+     ///////////////////////
+     */

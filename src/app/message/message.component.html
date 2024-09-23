@@ -1,0 +1,30 @@
+<div class="doctor">
+<div>
+    <div id="wrapper">
+      <div class="chat">
+        <div class="chat-container">
+          <div class="chat-listcontainer">
+            <ul class="chat-message-list">
+              <li *ngFor="let message of chatMessages; let i = index" [ngClass]="getMessageClasses(message)">
+                <div *ngIf="message.showSpinner" class="spinner">
+                  <div class="bounce1"></div>
+                  <div class="bounce2"></div>
+                  <div class="bounce3"></div>
+                </div>
+                <div *ngIf="!message.showSpinner" class="messageinner-{{message.name}}">
+                  <span class="message-text">{{ message.msg }}</span>
+                  <span *ngIf="message.showTime" class="message-time">{{ message.time|date:'MMM dd, yyyy HH:mm' }}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="d-flex justify-content-between mb-2 input-parent">
+    <input type="text" class="send" [(ngModel)]="massageContent">
+    <svg (click)="sendMessege()" style="fill:var(--color_1)" xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/></svg>
+  </div>
+</div>

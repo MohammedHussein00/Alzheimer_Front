@@ -1,0 +1,141 @@
+<!-- detection-result.component.html -->
+<div class="d-flex justify-content-end align-items-center">
+  <nav aria-label="breadcrumb" style="color: var(--icon-color);">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" style="color: var(--icon-color);">Alzheimer</li>
+      <li class="breadcrumb-item " aria-current="page"  style="color: var(--icon-color);">History</li>
+    </ol>
+  </nav>
+  <div  class="col-3 d-flex justify-content-end">
+    <a class="btn btn-primary" routerLink="/doctor/d/detection" style="background: var(--icon-color);
+    border: none;
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
+    border-top-right-radius: 0!important;
+  
+    " routerLinkActive="active">Detection</a>
+    <a class="btn btn-primary" routerLink="/doctor/d/history" style="background: var(--icon-color);border-bottom-left-radius: 0!important;
+    border-top-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;  
+    border:none;" routerLinkActive="active">History</a>
+  </div>
+  </div>
+
+<div class="container-fluid doctor">
+  <div class="row">
+    <div class="col-md-8 col-12">
+      <div class="calendar-container">
+        <div class="months-header d-flex row">
+          <div class="months-header d-flex align-items-center row">
+            <div *ngFor="let month of months; let i = index" class="col-lg-1 col-md-1" [class.activeMonth]="isActiveMonth(i)" (click)="selectMonth(i)">
+              {{ month }}
+            </div>
+          </div>
+          <hr style="margin: 1rem 0;border-top: 2px solid;">
+          <div class="d-flex justify-content-end">
+            <nav aria-label="Page navigation example" class="col-12">
+              <ul class="pagination justify-content-center">
+                <li class="page-item" style="width: 10%;cursor: pointer;" (click)="goToPreviousPage()">
+                  <a class="page-link" style="user-select: none;background: var(--result-select-day);border: 1px solid var(--icon-color);">Prev</a>
+                </li>
+                <li class="page-item" style="width: 10%;" *ngFor="let day of getDisplayedDays()">
+                  <a class="page-link" (click)="selectDay(day)" [class.active]="isSelectedDay(day)" style="background: var(--result-select-day);border: 1px solid var(--icon-color);">{{ day }}</a>
+                </li>
+                <li class="page-item" style="width: 10%;cursor: pointer;" (click)="goToNextPage()">
+                  <a class="page-link" style="user-select: none;background: var(--result-select-day);border: 1px solid var(--icon-color);">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <p style="margin-bottom:0px;font-size: 20px;font-family: inherit;font-weight: 700;color: var(--color_1);">
+          Detection of {{ selectedDate | date:'d MMMM' }}
+        </p>
+        <p style="font-size: 17px;font-family: inherit;font-weight: 700;color: var(--color_1);">
+          {{ selectedDate | date:'hh:mm a' }}
+        </p>
+
+        <div  class="days-header d-flex">
+          <img  *ngIf="selecteMRI"  style="width: 220px;" [src]="selecteMRI.mriUrl ? selecteMRI.mriUrl : 'assets/27.jpg'" alt="">
+
+          <div class="flex-column d-flex">
+            <span  *ngIf="selecteMRI" style="font-size: 20px;margin-left: 40px;margin-bottom: 40px;color: #0198a0;font-weight: 400;font-family: 'bootstrap-icons';">
+              {{ getNameOfImage(selecteMRI.mriUrl) }}
+            </span>
+            <span style="font-size: 20px;margin-left: 40px;margin-bottom: 40px;color: #0198a0;font-weight: 400;font-family: 'bootstrap-icons';">MRI of brain</span>
+            <span *ngIf="selecteMRI" style="font-size: 20px; margin-left: 40px;" [ngSwitch]="selecteMRI.result">
+              <span  *ngSwitchCase="'Mild'" style="color: rgb(246, 84, 84)!important;">
+                {{selecteMRI.result}} is the result of MRI
+              </span>
+              <span *ngSwitchCase="'Moderate'" style="color: red!important;">
+                {{selecteMRI.result}} is the result of MRI
+              </span>
+              <span *ngSwitchCase="'Severe'" style="color: rgb(154, 2, 2)!important;">
+                {{selecteMRI.result}} is the result of MRI
+              </span>
+              <span *ngSwitchCase="'NonDemented'" style="color: rgb(11, 224, 11)!important;">
+                {{selecteMRI.result}} is the result of MRI
+              </span>
+              <span *ngSwitchDefault>
+                {{selecteMRI.result}} is the result of MRI
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="d-flex row pt-3">
+          <button class="btn-detect" routerLink="/doctor/detection">Back for more Detection</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-12" style="    border-top-right-radius: 10px;
+    background: var(--appBG);
+    border-bottom-right-radius: 10px;
+    padding-right: 0px!important;">
+      <div class="d-flex flex-column  text-center">
+        <span style="color: white; font-size: 20px;padding: 20px;">Detection History</span>
+<div class="history" style="height: 622px; overflow: hidden; overflow-y: auto;">
+
+  <div >
+
+    <div *ngFor="let x of filteredDetection; let i=index" class="appoinment d-flex align-items-center justify-content-center flex-column" style="padding: 10px 0; cursor: pointer; color: white; transition: all 0.5s ease; margin-right: 5px;">
+      <span *ngIf="x.detectionMRIs.length>0"  style="text-align: start; width: 100%; margin-bottom: 10px; color: #c9cfcf; font-family: emoji; font-weight: bold;">
+        {{getHours_Munits(x.date)}}
+      </span>
+      <div *ngIf="x.detectionMRIs.length>0" class="d-flex align-items-center justify-content-between" style="width: 100%; display: flex; align-items: center;">
+        <div *ngFor="let detectMRI of x.detectionMRIs;let j=index" class="d-flex align-items-center" (click)="selectDetection(i,j)"
+        [ngClass]="{'active3':selecteMRI.id===detectMRI.id}"
+
+        >
+          <img [src]="detectMRI.mriUrl" alt="" class="poster" style="width: 26px; border-radius: 5px;">
+          <span style="display: flex; align-items: center;">
+            <p 
+            [ngClass]="{'active2':selecteMRI.id===detectMRI.id}"
+            style="margin-bottom: 0;
+            font-size: 17px;
+            padding: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color:white;
+            width: 40%;">{{ getNameOfImage(detectMRI.mriUrl) }}</p>
+            <p style="margin-top: auto; margin-bottom: 0; font-size: 17px; padding: 10px; color: #ffffff;"
+            [ngClass]="{'active2':selecteMRI.id===detectMRI.id}"
+
+            >{{ detectMRI.result }}</p>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!detection[0]">
+    <p style="color: white;">No detection history available for selected date.</p>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+</div>

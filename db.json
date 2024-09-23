@@ -1,0 +1,56 @@
+{
+  "students": [
+    {
+      "id": 101,
+      "fullName": "Mohammed Hussein",
+      "age": 21,
+      "courseId": 301,
+      "gpa": 1,
+      "imageUrl": "https://placehold.co/110x30"
+    },
+    {
+      "id": 104,
+      "fullName": "Rahma Shabaan",
+      "age": 21,
+      "courseId": 302,
+      "gpa": 2.9,
+      "imageUrl": "https://placehold.co/110x30"
+    },
+    {
+      "id": 103,
+      "fullName": "Wael Mahmoud",
+      "age": 33,
+      "courseId": 301,
+      "gpa": 302,
+      "imageUrl": "https://placehold.co/130x30"
+    },
+    {
+      "id": 105,
+      "fullName": "Ahmed21",
+      "age": 21,
+      "courseId": 301,
+      "gpa": 2.1,
+      "imageUrl": "https://placehold.co/130x30"
+    },
+    {
+      "id": 106,
+      "fullName": "Ahmed",
+      "age": 32,
+      "courseId": "301",
+      "gpa": 2.5,
+      "imageUrl": "https://placehold.co/130x30"
+    }
+  ],
+  "courses": [
+    {
+      "id": 301,
+      "name": "OPP",
+      "numOfHours": 60
+    },
+    {
+      "id": 302,
+      "name": "Data Structure",
+      "numOfHours": 20
+    }
+  ]
+}

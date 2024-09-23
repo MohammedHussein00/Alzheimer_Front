@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-between align-items-center">
+    <nav aria-label="breadcrumb" style="color: var(--icon-color);">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" style="color: var(--icon-color);">Alzheimer</li>
+        <li class="breadcrumb-item " aria-current="page"  style="color: var(--icon-color);">Detection</li>
+      </ol>
+    </nav>
+    <div  class="col-3 d-flex justify-content-end">
+      <a class="btn btn-primary"  routerLink="/d/detection" style="background: var(--icon-color);
+      border: none;
+      border-bottom-left-radius: 0!important;
+      border-bottom-right-radius: 0!important;
+      border-top-right-radius: 0!important;
+ 
+      " routerLinkActive="active">Detection</a>
+      <a class="btn btn-primary" style="  background: var(--icon-color);   border-bottom-left-radius: 0!important;
+      border-top-left-radius: 0!important;
+      border-bottom-right-radius: 0!important;  
+      border:none;" routerLink="/d/history" routerLinkActive="active">History</a>
+    </div>
+    </div>
+    
+    
+    <div class="row">
+      <div class=" col-lg-6 col-md-6 col-sm-12 mb-sm-5">
+          <div class="drag-drop-container" (drop)="onDrop($event)" (dragover)="onDragOver($event)"  style="padding:70px;border-color: var(--icon-color);font-weight: 700;">
+          <i
+    
+          class="bi bi-cloud-arrow-up" style="font-size: 26px;margin: auto;color:var(--icon-color);"></i>
+          <label  for="poster" style="color: blue;text-align: center;cursor:pointer">  Search for MRIs </label>
+          <input multiple hidden type="file"  name="poster" id="poster"  accept="image/*" placeholder="" (change)="onchange($event)">
+          <div class="divider-wrapper col-lg-4 col-md-8 col-sm-8"><span class="divider">Or</span></div>
+          <p style="margin: auto;color:var(--icon-color);"
+          >Drag and drop MRIs here </p>
+          <div>
+    
+          </div>
+          </div>
+          <button class="btn btn-sign-up mt-5"  data-toggle="modal" data-bs-target="#exampleModal" (click)="uploadImages()">Detect using AI model</button>
+    
+      </div>
+    
+    
+    
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-sm-5">
+      <div class="p-4" style="background-color: var(--background-base);border-radius: 10px;    min-height: 355px;">
+    
+    
+        <h6 style=" color: var(--icon-color);margin-bottom: 36px;text-align: center;font-weight: 700;">
+          <span *ngIf="files.length<=0">
+            Uploaded MRIs will appear here
+          </span>
+          <span *ngIf="files.length>0">
+            Your uploaded MRIs is
+            <small *ngIf="files.length==1"> one MRI</small>
+            <small *ngIf="files.length>1"> {{files.length}} MRIs</small>
+          </span>
+        </h6>
+    
+    
+        <div *ngIf="files.length<=0"  style="    border: 1px solid var(--icon-color);border-radius: 10px;padding: 0px 20px;opacity: 0.6;pointer-events: none;margin-bottom: 15px;" class=" d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center" >
+            <img style="width: 50px;border-radius: 5px;" class="poster" src="assets/27.jpg" alt="">
+            <span>
+              <p style="margin-top: auto;margin-bottom: 0;font-size: 17px;padding:10px;color:var(--icon-color)">MRI example</p>
+              <p style="margin-top: auto;margin-bottom: 0;font-size: 17px;padding:10px;color:var(--icon-color)">MRI size</p>
+            </span>
+          </div>
+          <i class="bi bi-x" style="color: var(--icon-color);font-size: 20px;cursor: pointer;"></i>
+    
+        </div>
+    
+    
+    
+    
+        <div style="    border: 1px solid var(--icon-color);border-radius: 10px;padding: 0px 20px;margin-bottom: 15px;" class=" d-flex align-items-center justify-content-between" *ngFor="let file of files;let i=index">
+          <div class="d-flex align-items-center">
+              <img style="width: 50px;border-radius: 5px;" class="poster" src="{{fileAsBase64[i]}}" alt="">
+              <span>
+                <p style="margin-top: auto;margin-bottom: 0;font-size: 17px;padding:10px;color:var(--icon-color)">{{file.name}}</p>
+                <p style="margin-top: auto;margin-bottom: 0;font-size: 17px;padding:10px;color:var(--icon-color)">{{formatFileSize(file.size) }}</p>
+              </span>
+          </div>
+          <i class="bi bi-x" style="color: var(--icon-color);font-size: 20px;cursor: pointer;" (click)="removeMRI(i)"></i>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    
+    
+    
+    
+   
+    
+    
+    <router-outlet></router-outlet>
+    

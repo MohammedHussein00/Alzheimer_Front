@@ -1,0 +1,152 @@
+.doctor{
+    background-color:var(--background-base) ;
+    border-radius: 10px;
+  }
+  span,h6{
+    color: var(--icon-color);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .activeMonth {
+    color: var(--color_1)!important;
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .col-lg-1, .col-md-1 {
+    cursor: pointer;
+    text-align: center; /* Center align text */
+    padding: 4px; /* Padding for better spacing */
+    color: var(--icon-color);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .calendar-container {
+    margin: 20px auto;
+    text-align: center;
+    width: 100%; /* Ensures that the container takes full width */
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 20%;
+    align-items: center;
+  }
+
+  .days-header, .days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .day {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px; /* Adjust height for smaller screens */
+  }
+
+  .empty {
+    background-color: #eaeaea;
+  }
+
+  .selected {
+    color: white!important;
+    border-radius: 50%;
+    position: sticky;
+  }
+  .selected::after{
+    content: "";
+    width: 28px;
+    border-radius: 50%;
+    position: absolute;
+    margin: auto;
+    z-index: -3;
+    height: 28px;
+    background-color: var(--color_1);
+  }
+  @media (max-width: 768px) {
+    .days-header, .days-grid {
+      grid-template-columns: repeat(7, 1fr); /* Keeps the 7-day layout on tablets */
+    }
+
+    .day {
+      padding: 8px;
+      height: 35px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .controls span {
+      font-size: 14px; /* Smaller font size for smaller screens */
+    }
+
+    .days-header, .days-grid {
+      grid-template-columns: repeat(7, 1fr); /* Keeps the 7-day layout on mobile */
+    }
+
+    .day {
+      padding: 5px;
+      height: 30px;
+    }
+  }
+.appoinment:hover{
+  color: var(--color_2)!important;
+}
+.bi-chat-fill::before{
+  transform: rotateY(180deg);
+}

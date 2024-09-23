@@ -1,0 +1,227 @@
+
+
+:root {
+  --dash-color: #6973e3;
+  --color_1: #0198A0;
+  --hr: black;
+  --sider-color: #0198A0;
+  --filter-color: #0198A0;
+  --color_2: #FFA500;
+  --color_3: #FFA500;
+  --color_4: #F9CA74;
+  --color_5: #f7f7f7;
+  --box-Sh:0px 0px 9px 7px rgb(0 0 0 / 34%);
+  --main-class-color:#e9eaeb;
+  --icon-color:#6c757d;
+  --sider-shadow:0px 0px 11px 0px rgb(34 37 40 / 25%);
+  --font-color-1:black;
+  --filter-header-color:white;
+  --background-base:white;
+  --input-search-parent:#f0f3f8;
+  --input-search-color:#6c757d;
+  --chekBG:#ffffff;
+  --scheduleBG:#f6f7f9;
+  --appBG:#0198A0;
+  --result-select-day:#ffffff;
+  --doctors-hover:rgb(223 223 223);
+  --width-rate:90px
+
+
+}
+a {
+  text-decoration: none;
+}
+ul{
+  list-style: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before{
+  color: inherit;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.breadcrumb-item+.breadcrumb-item::before{
+  color: inherit;
+}
+.form-check-input{
+  background-color: var(--chekBG)!important;
+}
+.form-check-input:checked {
+  background-color: #0d6efd!important;
+  border-color: #0d6efd!important;
+}
+.form-check-input{
+  border-color: var(--icon-color)!important;
+}
+
+
+
+input[type="time"] {
+  -moz-appearance: textfield;
+}
+input[type="time"]::-webkit-inner-spin-button,
+input[type="time"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* @keyframes FadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+} */
+
+.FadeInAnimation {
+  animation: FadeIn 1s ease forwards;
+}
+
+
+/* start rating */
+
+.star-rating {
+  height: calc(var(--width-rate) / 5);
+  position: relative;
+  width: var(--width-rate);
+}
+
+.star-rating:before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%230198A0' class='bi bi-star' viewBox='0 0 16 16'%3E%3Cpath d='M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z'/%3E%3C/svg%3E"); /* Replace the URL with the encoded SVG data */
+  background-repeat: repeat-x;
+  background-size: calc(var(--width-rate) / 5);
+  bottom: 0;
+  content: "";
+  display: block;
+  height: calc(var(--width-rate) / 5);
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: var(--width-rate);
+}
+
+.star-rating > span {
+  display: block;
+  text-indent: -10000px;
+  width: var(--width-rate);
+  left: 0;
+  height: calc(var(--width-rate) / 5);
+  position: absolute;
+  overflow: hidden;
+}
+
+.star-rating > span:before {
+  background-image: url('data:image/svg+xml,<svg style="fill: %230198A0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>'); /* Replace the URL with the SVG data of your chosen icon */
+  background-repeat: repeat-x;
+  background-size: calc(var(--width-rate) / 5);
+  bottom: 0;
+  content: "";
+  display: block;
+  height:calc(var(--width-rate) / 5);
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-indent: 10000px;
+  top: 0;
+}
+
+.star-rating {
+  &.harambe {
+    &:before {
+      background-image: url('data:image/svg+xml;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/></svg>');
+    }
+    > span {
+      &:before {
+        background-image: url('data:image/svg+xml;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/></svg>');
+      }
+    }
+  }
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Monoton');
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300');
+a{
+  text-decoration:none!important;
+}
+
+/* endRating */
+.toasttest{
+  transition: all .3s ease;
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  opacity: 0;
+  z-index: -5;
+  display: block!important;
+}
+.btn-close {
+  padding: 0.5rem 0.7rem;
+  border-radius: 50%;
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+}
+/* loader */
+.loader{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1239;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000059;
+
+}
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #ffffff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+/* loader*/

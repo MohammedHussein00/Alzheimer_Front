@@ -1,0 +1,105 @@
+<nav aria-label="breadcrumb" style="color: var(--icon-color);margin-bottom: 20px;">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" style="color: var(--icon-color)">Doctor</li>
+    <li
+      class="breadcrumb-item active"
+      aria-current="page"
+      style="color: var(--icon-color)"
+    >
+      Profile
+    </li>
+  </ol>
+</nav>
+
+
+
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="flex-row-reverse row">
+      <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <label class="poster  mt-5 position-relative" for="poster"><img class="rounded-circle bg-light" style="cursor:pointer;width: 150px;height:150px;" src="{{base64}}" alt="">
+              <i class="bi bi-camera"></i>
+            </label>
+            <input hidden type="file"  name="poster" id="poster" (change)="onchange($event)"  accept="image/*" placeholder="" >
+            <span class="font-weight-bold mt-3">{{profile.name}}</span><span class="text-black-50">{{profile.currentEmail||profile.email}}</span><span> </span>
+          </div>
+      </div>
+      <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+              <div class="d-flex  align-items-center mb-3">
+                  <h4 style="  color:var(--icon-color);">Personal information</h4>
+              </div>
+              <div class="row mt-2">
+                <div class="col-md-12 ">
+                  <label class="labels">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter name" [(ngModel)]="profile.name"
+                  [ngClass]="{'is-invalid': (name.touched || name.dirty) && name.invalid, 'is-valid': name.touched && name.valid}"
+                  minlength="3"
+                  #name="ngModel" required>
+                  <div *ngIf="name.touched && !name.value" class="text-danger">Name is required</div>
+                  <div *ngIf="name.value&&name.invalid&&name.touched" class="text-danger">name must be more than 2 characters</div>
+                </div>
+                </div>
+              <div class="row mt-3">
+                <div class="col-md-12 mb-3">
+                  <label class="labels">Email</label>
+                  <input type="email" class="form-control" placeholder="Enter email" [(ngModel)]="profile.email"
+                      [ngClass]="{'is-invalid': (email.touched || email.dirty) && email.invalid, 'is-valid': email.touched && email.valid}"
+                      #email="ngModel" name="email" required email>
+                  <div *ngIf="name.touched && !name.value" class="text-danger">Email is required</div>
+                  <div *ngIf="(email.touched && email.dirty) && email.invalid&&email.value" class="text-danger">Invalid email format</div>
+              </div>
+
+                  <div class="col-md-12 mb-3">
+                    <label class="labels">Date of birth</label>
+                    <input type="date" class="form-control" [(ngModel)]="profile.dob"
+                    [ngClass]="{'is-invalid': (dOB.touched || dOB.dirty) && dOB.invalid, 'is-valid': dOB.touched && dOB.valid}"
+                    #dOB="ngModel" required>
+                    <div *ngIf="dOB.touched && !dOB.value" class="text-danger">DOB is required</div>
+
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label class="labels">Number phone</label>
+                    <input type="number" class="form-control"
+                    [ngClass]="{'is-invalid': (phone.touched || phone.dirty) && phone.invalid, 'is-valid': phone.touched && phone.valid}"
+                    placeholder="Enter phone" [(ngModel)]="profile.phone" name="phone" #phone="ngModel"  required [minlength]="11" [maxlength]="11">
+                  <div *ngIf="phone.touched && !phone.value" class="text-danger">Phone is required</div>
+                  <div *ngIf="phone.value&&phone.invalid&&phone.touched" class="text-danger">Phone must be 11 digits</div>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label class="labels">Gender</label>
+                    <app-select-list  style="width: 100%;" [receivedData]="selectInputs" [mode]="false" [Mode]="mode" (sendData)="handleSelectedData($event)"></app-select-list>
+                    </div>
+
+                    </div>
+
+              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" [disabled]="!isFormValid()" (click)="update()">Save Profile</button></div>
+          </div>
+      </div>
+      <div class="col-md-4 row">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center experience">
+                <span><i class="bi bi-pencil-square" style="cursor: pointer;color: var(--icon-color);"></i></span>
+          </div>
+              <div class="d-flex justify-content-between align-items-center flex-column experience">
+                <span class="pt-3 w-100">Change password</span>
+                <div class="col-12 mb-3"><label class="labels">Old password</label><input type="text" class="form-control" value="" placeholder="Password"></div>
+                <div class="col-12 mb-3"><label class="labels">New password</label><input type="text" class="form-control" value="" placeholder="Password"></div>
+                <div class="col-12 mb-3"><label class="labels">Confirm password</label><input type="text" class="form-control" value="" placeholder="Confirm"></div>
+                <div class="col-12 mb-3"><button class="btn btn-primary">Change</button></div>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<app-notification
+    [title]="'New notification'"
+    [avatarUrl]="'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'"
+    [user1]="'evondev'"
+    [user2]="'Trần Anh Tuấn'"
+    [others]="154"
+    [community]="'Cộng đồng Frontend Việt Nam'"
+></app-notification>

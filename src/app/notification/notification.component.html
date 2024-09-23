@@ -1,0 +1,18 @@
+<div class="notification"
+[ngClass]="{ 'show': showNotification }">
+    <div class="notification-header d-flex justify-content-between">
+        <h3 class="notification-title">{{ title }}</h3>
+        <i class="fa fa-times notification-close close" (click)="closeNotification()"></i>
+    </div>
+    <div class="notification-container">
+        <div class="notification-media">
+            <img [src]="avatarUrl" alt="" class="notification-user-avatar rounded-circle">
+        </div>
+        <div class="notification-content">
+            <p class="notification-text">
+                <strong>{{ user1 }}</strong>, <strong>{{ user2 }}</strong> and {{ others }} others react to your post in <strong>{{ community }}</strong>
+            </p>
+        </div>
+        <span class="notification-status"></span>
+    </div>
+</div>

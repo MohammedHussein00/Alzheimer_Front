@@ -1,0 +1,107 @@
+<div class="loader"
+*ngIf="loader.isLoading|async"
+><div class="lds-facebook"><div></div><div></div><div></div></div>
+</div>
+
+
+
+<div class="d-flex row">
+    <div class="sideLeft col-4 col d-none d-sm-flex">
+      <div class="d-flex align-items-center">
+        <img style="width:105px;margin-top: 0;" class="logo" src="assets/Logo.png" alt="Logo">
+        <h1 class="custom-font">
+        <span class="Alzheimer-color">
+        Alzheimer</span> disease
+        </h1>
+      </div>
+      <img src="assets/Welcome.png" alt="Error">
+    </div>
+
+    <div class="col-lg-8 col-md-8 col-sm-12 flex-column d-flex align-items-center justify-content-center">
+      <h4 class="mb-5">Welcome back</h4>
+      <form [formGroup]="login" class="col-lg-4 col-md-8 col-sm-8" (ngSubmit)="loginNewAccount()">
+
+
+
+
+        <div class="input-group mb-2">
+          <i class="bi bi-envelope"
+          [ngClass]="{'iInvalid':login.controls['email'].invalid&&login.controls['email'].touched,'iValid':login.controls['email'].valid}"
+
+          ></i>
+          <input type="email"  placeholder="Email" class=" is-invalid" name="email" aria-describedby="validationEmail" required formControlName="email"
+          [ngClass]="{'inputInvalid':login.controls['email'].invalid&&login.controls['email'].touched,'inputValid':login.controls['email'].valid}"
+          >
+          <div id="validationEmail" class="invalid-feedback">
+            <p *ngIf="login.controls['email'].value===''&& login.controls['email'].touched" class="mb-0">
+              * Email is required.
+            </p>
+            <p *ngIf="login.controls['email'].invalid&&login.controls['email'].value!==''&& login.controls['email'].touched" class="mb-0">
+             * Must be a valid email.
+            </p>
+
+          </div>
+        </div>
+
+
+
+
+        <div class="input-group mb-2">
+          <svg class="svg-inline--fa fa-lock"
+          [ngClass]="{'iInvalid':login.controls['password'].invalid&&login.controls['password'].touched,'iValid':login.controls['password'].valid}"
+
+           aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"></path></svg>
+
+          <input [type]="showPassword ? 'text' : 'password'"  placeholder="Password" class=" is-invalid" name="password" aria-describedby="validationPassword" required formControlName="password"
+          [ngClass]="{'inputInvalid':login.controls['password'].invalid&&login.controls['password'].touched,'inputValid':login.controls['password'].valid}"
+          >
+
+          <i class="bi bi-eye" style="left: 90%;" *ngIf="!showPassword" (click)="togglePasswordVisibility()"
+          [ngClass]="{'iInvalid':login.controls['password'].invalid&&login.controls['password'].touched,'iValid':login.controls['password'].valid}"
+
+          ></i>
+          <i class="bi bi-eye-slash" style="left: 90%;" *ngIf="showPassword" (click)="togglePasswordVisibility()"
+          [ngClass]="{'iInvalid':login.controls['password'].invalid&&login.controls['password'].touched,'iValid':login.controls['password'].valid}"
+
+          ></i>
+
+          <div id="validationPassword" class="invalid-feedback">
+            <p *ngIf="login.controls['password'].value===''&& login.controls['password'].touched" class="mb-0">
+              * Password is required.
+            </p>
+            <p *ngIf="login.controls['password'].invalid&&login.controls['password'].value!==''&& login.controls['password'].touched" class="mb-0">
+             * Must have characters and numbers, be at least 8 characters long, and include uppercase (A-Z), lowercase (a-z), numbers (0-9), and special characters.
+
+            </p>
+
+          </div>
+        </div>
+
+        <div>
+          <p *ngIf="Message!=''" class="mb-2 text-center" style="color: red;">
+            *{{Message}}
+          </p>
+
+        </div>
+        <button (click)="loginNewAccount()" class="loginButton">login now</button>
+
+
+      </form>
+      <p>Don't have an account?
+        <a routerLink="/register" style="color: var(--color_1);">Sign Up</a>
+      </p>
+      <div class="divider-wrapper col-lg-4 col-md-8 col-sm-8"><span class="divider">Or</span></div>
+      <div class="col-lg-4 col-md-8 col-sm-8 position-relative">
+      <div class="g-signin2 " data-onsuccess="onSignIn">
+      </div>
+      <p style="position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: 100%;
+      text-align: center;
+      font-weight: 500;
+      pointer-events: none;
+  ">Continue with Google</p>
+
+    </div>
+  </div>

@@ -1,0 +1,137 @@
+<nav class="navbar "
+[ngStyle]="global.night ? {'background': '#3a444e'} : {'background': 'white'}"
+>
+  <div class="container-fluid">
+    <div class="fullscreen-container w-25 justify-content-between d-flex align-items-center">
+      <i class="bi bi-list nav-icon" (click)="hide()" style="font-size: 24px;"
+
+    ></i>
+
+    <!-- <form class="d-flex" role="search" [formGroup]="clearForm">
+      <div class="input-group"
+      [ngStyle]="global.night ? {'background': '#464f5b'} : {'background': '#f0f3f8'}"
+      >
+          <div class="input-group-prepend"
+          [ngStyle]="global.night ? {'background': '#464f5b'} : {'background': '#f0f3f8'}"
+
+          >
+              <span class="input-group-text" id="search-addon"
+              [ngStyle]="global.night ? {'background': '#464f5b'} : {'background': '#f0f3f8'}"
+
+              style="border:0;">
+                  <i class="bi bi-search"
+
+                  ></i>
+              </span>
+          </div>
+          <input id="inputSearch"  type="text" style="outline: none;border:0;"  placeholder="Search" aria-label="Search" aria-describedby="search-addon"
+          [ngStyle]="global.night ? {'background': '#464f5b'} : {'background': '#f0f3f8'}"
+          (focus)="handleInput($event)"
+          (blur)="handleBlur()"
+
+          formControlName="inputVal"            >
+          <i id="clear" class="bi bi-x" style="margin: auto;font-size: 25px;"  (click)="clearValue()"
+              [ngStyle]="showClear&&clearForm.controls['inputVal'].value!='' ? {'z-index': '0'} : {'z-index': '-1'}"
+          ></i>
+
+      </div>
+      <button type="submit" class="search-btn btn btn-outline-primary ml-2 " data-mdb-ripple-init
+      style="background-color: #6973e3;border-radius: 3px;border-radius: 0px 4px 4px 0px;color:white"
+      >Search</button>
+  </form> -->
+
+  <i class="bi bi-bell nav-icon" style="position: relative;"
+
+  >
+    <span class=" p-1 bg-danger border border-light rounded-circle" style="position: absolute;top: 0px;right: -4px;">
+    </span>
+  </i>
+
+  <i class="bi bi-moon nav-icon" *ngIf="!global.night" (click)="convert_to_moon_light()"
+  ></i>
+  <i class="bi bi-sun nav-icon"  *ngIf="global.night" (click)="convert_to_moon_light()"
+
+  ></i>
+
+    <i class="bi bi-fullscreen nav-icon" *ngIf="!isFullScreen" (click)="toggleFullScreen()"
+    [ngStyle]="global.night ? {'color': '#8391a2'} : {'color': '#6c757d'}"
+
+    ></i>
+    <i class="bi bi-fullscreen-exit nav-icon" *ngIf="isFullScreen" (click)="toggleFullScreen()"
+    [ngStyle]="global.night ? {'color': '#8391a2'} : {'color': '#6c757d'}"
+
+    ></i>
+    </div>
+    <div class="d-flex justify-content-end  w-75">
+      <button class="btn btn-login"   *ngIf="!isAuthenticated" routerLink="/login">Login</button>
+      <button class="btn btn-sign-up" *ngIf="!isAuthenticated" routerLink="/register-doctor">Sign Up</button>
+
+
+      <div  class="dropdown-center" *ngIf="isAuthenticated" style="position: relative;margin-right: 30px;"  type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-envelope" style="font-size: 25px;"
+        [ngStyle]="global.night ? {'color': '#8391a2'} : {'color': '#6c757d'}"
+
+        ></i>
+        <span class="indicator">{{unReadNumber}}</span>
+        <ul class="dropdown dropdown-menu" style="top: 92%; right: -20px; left: auto; width: 500px !important;">
+          <li *ngFor="let x of chats" class="dropdown-item" [routerLink]="['/doctor/chat',x.patient?.id]">
+            <div class="row">
+              <div class="col-3">
+                <img class="docImg" [src]="x.patient?.imgUrl ? x.patient?.imgUrl : 'assets/01.jpg'" alt="">
+              </div>
+              <div class="col-9">
+                <p style="color: blue;">{{ x.patient?.name }}</p>
+                <p>{{ x.content }}</p>
+                <span class="d-flex">
+                  <i class="bi bi-clock" style="color:var(--icon-color);font-size:12px;padding-right:10px;"></i>
+
+                <p style="color:var(--icon-color);font-size:12px">{{ x.time | date:'MMM dd, yyyy HH:mm' }}</p>
+              </span>
+              </div>
+            </div>
+            <hr>
+          </li>
+        </ul>
+
+      </div>
+
+
+
+
+      <div class="dropdown-center " *ngIf="isAuthenticated">
+        <div class="d-flex align-items-center profile" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img [src]="photo?photo:'assets/profile1.png'" alt="" class="rounded-img rounded-circle" style="width: 30px;height: 30px;">
+          <p
+          [ngStyle]="global.night ? {'color': '#8391a2'} : {'color': '#6c757d'}"
+
+          style="margin-left: 10px;">Profile</p>
+          <svg style="    width: 30px;transform: rotate(90deg);" width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+            [ngStyle]="night?{'fill':'#8391a2'}:{'fill':'#6c757d'}"
+            d="M8.74708 6.65008C9.13761 7.0406 9.13761 7.67377 8.74708 8.06429L2.38312 14.4283C1.9926 14.8188 1.35943 14.8188 0.968909 14.4283C0.578385 14.0377 0.578385 13.4046 0.968909 13.014L6.62576 7.35719L0.968909 1.70033C0.578385 1.30981 0.578385 0.676644 0.968909 0.286119C1.35943 -0.104405 1.9926 -0.104405 2.38312 0.286119L8.74708 6.65008ZM7.00002 6.35719L8.03998 6.35719L8.03998 8.35719L7.00002 8.35719L7.00002 6.35719Z" />
+            </svg>
+
+        </div>
+        <ul class="dropdown-menu" style="top:110%;right:0;left:auto;width: 180px!important;">
+          <p style="padding: 0 10px;">{{name}}</p>
+          <hr>
+          <li class="popLi"><span>Personal profile </span><i class="bi bi-person-circle"></i> </li>
+          <li class="popLi"><span>Edit profile</span><i class="bi bi-pencil-square"></i></li>
+          <li class="popLi"><span>Seting</span><i class="bi bi-gear"></i></li>
+          <li class="popLi" (click)="logout()"><span>Logout</span><i class="bi bi-box-arrow-in-right"></i></li>
+        </ul>
+      </div>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+  </div>
+</nav>

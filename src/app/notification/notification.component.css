@@ -1,0 +1,53 @@
+.notification {
+  background: white;
+  position: fixed;
+  top: -100%;
+  right: 43px;
+  transition: top 1.5s ease; /* Add transition to smooth the animation */
+  border-radius: 4px;
+  padding: 20px;
+  width: 320px; /* Adjust the width as needed */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Add box shadow for depth */
+}
+
+.notification.show {
+  top: 20px; /* Show notification by moving it down */
+  transition: top 1.5s ease; /* Add transition to smooth the animation */
+
+}
+
+.close {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F0F2F5;
+  font-size: 14px;
+}
+
+.notification-media img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.notification-header {
+  margin-bottom: 10px;
+}
+
+.notification-title {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.notification-text {
+  margin-bottom: 5px;
+}
+
+.notification-timer {
+  color: #999;
+  font-size: 12px;
+}

@@ -1,0 +1,23 @@
+<div class="d-flex row">
+  <div
+    class="col d-none d-sm-flex FadeInAnimation z-3"
+    style="transition: all 0.5s ease"
+    [ngClass]="{ 'col-lg-1 col-md-2': hide, 'col-lg-2 col-md-3': !hide }"
+  >
+    <app-doctor-sidebar style="width: 100%"></app-doctor-sidebar>
+  </div>
+
+  <div
+    class="col-lg-10 col-md-9 col-sm-12 flex-column d-flex FadeInAnimation main"
+    style="transition: all 0.5s ease"
+    [ngClass]="{ 'col-lg-11 col-md-10': hide, 'col-lg-10 col-md-9': !hide }"
+  >
+    <app-doctor-header></app-doctor-header>
+
+    <div style="overflow: hidden; overflow-y: auto; height: 87vh">
+      <div class="d-flex p-5 w-100 flex-column">
+        <app-root></app-root>
+      </div>
+    </div>
+  </div>
+</div>

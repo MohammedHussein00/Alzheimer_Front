@@ -1,0 +1,17 @@
+.doctor{
+  background-color:var(--background-base) ;
+  border-radius: 10px;
+}
+.appointment{
+  cursor: pointer;
+}
+.appointment:hover{
+  background-color: aquamarine;
+  color: black;
+}
+.label{
+  color: var(--color_1);
+  font-weight: 700;
+  padding: 10px;
+
+}

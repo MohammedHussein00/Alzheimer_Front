@@ -1,0 +1,51 @@
+<div class="loader"
+*ngIf="loader.isLoading|async"
+><div class="lds-facebook"><div></div><div></div><div></div></div>
+</div>
+
+<div class="d-flex row">
+  <div class="sideLeft col-4 col d-none d-sm-flex">
+    <div class="d-flex align-items-center">
+      <img style="width:105px;margin-top: 0;" class="logo" src="assets/Logo.png" alt="Logo">
+      <h1 class="custom-font">
+      <span class="Alzheimer-color">
+      Alzheimer</span> disease
+      </h1>
+    </div>
+    <img src="assets/Welcome.png" alt="Error">
+  </div>
+
+  <div class="col-lg-8 col-md-8 col-sm-12 flex-column d-flex align-items-center justify-content-center">
+    <h4 class="mb-5">Verify your email</h4>
+
+
+    <div id="wrapper" >
+      <div id="dialog" class="row">
+        <h5>Please enter the 6-digit verification code we sent via email adress:</h5>
+        <span>(we want to make sure it's you before we contact our movers)</span>
+        <div id="form" class="col-lg-6 col-md-8">
+          <div class="d-flex justify-content-between">
+            <input type="text" #digitInput1 maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+            <input type="text" #digitInput2 maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+            <input type="text" #digitInput3 maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+            <input type="text" #digitInput4 maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+            <input type="text" #digitInput5 maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+            <input type="text" #digitInput6 maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+          </div>
+          <button class="btn btn-embossed" (click)="verifyCode(digitInput1.value, digitInput2.value, digitInput3.value, digitInput4.value, digitInput5.value, digitInput6.value)">Verify</button>
+
+        <div class="d-flex align-items-center justify-content-center">
+          <h6 style="margin-bottom: 0;">Didn't receive the code? </h6> <a href="" style="font-size:14px;">Send code again</a>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>

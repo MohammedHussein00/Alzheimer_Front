@@ -1,0 +1,248 @@
+.doctor{
+    background-color:var(--background-base) ;
+    border-radius: 10px;
+  }
+
+  .docImg{
+    width: 90%;
+    aspect-ratio: 1/1;
+      border-radius: 50%;
+  }
+  .Stethoscope{
+    width: 20px;
+    display: flex;
+    height: 24px;
+    fill: #727cf5;
+    margin-right: 20px;
+  }
+  .rate-booking{
+    justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+  }
+  .btn-sign-up{
+    background-color: #727cf5!important;
+    margin-left: 10px!important;
+    color: white;
+    width: 100%;
+  }
+  .input-search-parent{
+    background-color: var(--input-search-parent);
+  }
+  .input-group{
+    width: auto;
+  }
+
+  .filter-header{
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    color: white;
+    background-color: #727cf5;
+  }
+  hr{
+    color: var(--hr);
+  }
+  .accordion-button::after{
+    transform: rotate(-45deg);
+    color: var(--icon-color);
+    border-right: 2px solid;
+    height: 12px;
+    width: 12px;
+    border-bottom: 2px solid;
+    background-image: none;
+    transform-origin: center;
+
+  }
+  .accordion-button:not(.collapsed)::after{
+    transform: rotate(45deg);
+    color: var(--icon-color);
+    transform-origin: center;
+
+
+  }
+  .accordion-item{
+    background: none;
+    border: none;
+  }
+  .accordion-button{
+    background: none;
+    box-shadow: none;
+    color: var(--icon-color);
+  }
+  h5{
+    color: var(--icon-color);
+  }
+  p{
+    color: var(--icon-color);
+  }
+  .info{
+    color: var(--icon-color);
+
+  }
+  span,h6{
+    color: var(--icon-color);
+  }
+
+
+  .pateint-img{
+    height: 70px;
+    width: 70px;
+  }
+  svg{
+  display: flex;
+  width: 20px;
+  margin-right: 10px;
+  }
+  svg path{
+  fill: #727cf5;
+  }
+
+  .toasttest{
+    transition: all .3s ease;
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    opacity: 0;
+    z-index: -5;
+    display: block!important;
+  }
+
+  ul{
+    text-align: center;
+    padding: 12px;
+
+  }
+  li{
+    text-align: center;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 10px;
+  }
+
+
+
+  .i{
+    position: absolute;
+      left: 14px;
+      top: 0px;
+      font-size: 21px;
+      color: #727cf5;
+  }
+  .col-8{
+    width: 66.66666667%!important;
+  }
+  .carousel-control-next-icon, .carousel-control-prev-icon{
+    width: auto;
+    height: auto;
+  }
+  .shift{
+    text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 10px 20px;
+      margin-bottom: 3px;
+      border-radius: 5px;
+  }
+  .send{
+    padding: 3px;
+    outline: none;
+    border:none;
+    border-radius: 4px;
+  }
+  .input-parent{
+    border: 1px solid var(--icon-color);
+    border-radius:  4px;
+  }
+  .input-parent:focus-within {
+    border-color:  #727cf5!important;
+  }
+
+
+  #wrapper {
+    width: 100%;
+  }
+
+
+
+  .chat ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .message-left .message-time {
+    display: block;
+    font-size: 12px;
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 4px;
+    color: #ccc;
+    font-family: Courier;
+  }
+
+  .message-right .message-time {
+    display: block;
+    font-size: 12px;
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 4px;
+    color: #ccc;
+    font-family: Courier;
+  }
+
+  .message-left {
+    text-align: left;
+    margin-bottom: 16px;
+  }
+
+  .message-left .message-text {
+    max-width: 80%;
+    display: inline-block;
+    background: #fff;
+    padding: 15px;
+    font-size: 14px;
+    color: #999;
+    border-radius: 30px;
+    font-weight: 100;
+    line-height: 1.5em;
+  }
+
+  .message-right {
+    text-align: right;
+    margin-bottom: 16px;
+  }
+
+  .message-right .message-text {
+    line-height: 1.5em;
+    display: inline-block;
+    background: #5ca6fa;
+    padding: 15px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 30px;
+    line-height: 1.5em;
+    font-weight: 100;
+    text-align: left;
+  }
+
+  .chat {
+    border-radius: 30px;
+    padding: 20px;
+    background: #f5f7fa;
+  }
+
+  .chat-container {
+    height: 400px;
+    overflow-y: scroll;
+    padding-right: 16px;
+  }
+
+  .spinner {
+    margin: 0;
+    width: 30px;
+    text-align: center;
+  }

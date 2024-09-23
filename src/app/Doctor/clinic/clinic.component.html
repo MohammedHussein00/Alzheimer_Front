@@ -1,0 +1,167 @@
+<div class="d-flex align-items-center justify-content-between">
+<nav aria-label="breadcrumb" style="color: var(--icon-color);">
+    <ol class="breadcrumb " style="margin: 0;">
+      <li class="breadcrumb-item" style="color: var(--icon-color)">Doctor</li>
+      <li
+        class="breadcrumb-item active"
+        aria-current="page"
+        style="color: var(--icon-color)"
+      >
+        Clinic
+      </li>
+    </ol>
+  </nav>
+
+  <button  class="btn btn-primary  " style="width: fit-content;" (click)="addClinic()"><i class="bi bi-plus "></i> Add New Clinic</button>
+</div>
+
+  <div class="container rounded bg-white mt-5 mb-5">
+
+    <div class="flex-row-reverse row" *ngFor="let clinic of form,let i=index">
+
+      <hr *ngIf="0!==i">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+              <div style="width: 100%;" class="mt-4">
+                <div class="drag-drop-container mt-5 mb-2" (drop)="onDrop($event,i)" (dragover)="onDragOver($event)"  style="padding:40px;border-color: var(--icon-color);font-weight: 700;">
+                <i  class="bi bi-cloud-arrow-up text-center w-100" style="font-size: 26px;margin: auto;color:var(--icon-color);"></i>
+                <label   for="poster{{i}}" style="color: blue;text-align: center;cursor:pointer">  Search for images </label>
+                <input multiple hidden  type="file" name="poster{{i}}" id="poster{{i}}" accept="image/*" placeholder="" (change)="onchange($event, i)">
+                <div  class="divider-wrapper col-lg-4 col-md-8 col-sm-8"><span class="divider">Or</span></div>
+                <span   style="margin: auto;color:var(--icon-color);margin-bottom: 20px;"
+                >Drag and drop images  </span>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span (click)="previousImageGet(i)" style="width: 10px; height: 10px; border-top: 2px solid var(--color_1); border-left: 2px solid var(--color_1); transform: rotate(-45deg);"></span>
+
+
+                  <div class="position-relative">
+
+                    <img  src="{{ clinic.imagesURL[currentIndexGet[i]] }}" alt="" style="max-width:100px">
+                    <i *ngIf="clinic.imagesURL[currentIndexGet[i]]"  (click)="removeImageGet(i, currentIndexGet[i])" class="bi bi-x" style="position: absolute; right: 5px; left: auto; color: rgb(0, 0, 0);"></i>
+                  </div>
+                  <span (click)="nextImageGet(i)" class="next" style="width: 10px; height: 10px; border-top: 2px solid var(--color_1); border-right: 2px solid var(--color_1); transform: rotate(45deg);"></span>
+
+              </div>
+              <div>
+
+                </div>
+                </div>
+
+
+            </div>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex  align-items-center mb-3">
+                    <h4 style="  color:var(--icon-color);">Clinic information</h4>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-md-12 mb-3">
+                    <label class="labels">Clinic name</label>
+                    <input type="text" class="form-control" placeholder="Enter name" [(ngModel)]="clinic.name"
+                    [ngClass]="{'is-invalid': (name.touched || name.dirty) && name.invalid, 'is-valid': name.touched && name.valid}"
+                    minlength="3"
+                    #name="ngModel" required>
+                    <div *ngIf="name.touched && !name.value" class="text-danger">Clinic name is required</div>
+                    <div *ngIf="name.value&&name.invalid&&name.touched" class="text-danger">name must be 2 characters</div>
+
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label class="labels">Location</label>
+                    <input type="text" class="form-control" placeholder="Enter location"
+                    [ngClass]="{'is-invalid': (location.touched || location.dirty) && location.invalid, 'is-valid': location.touched && location.valid}"
+
+                    [(ngModel)]="clinic.location" minlength="11" #location="ngModel" required>
+                    <div *ngIf="location.touched && !location.value" class="text-danger">Location name is required</div>
+                    <div *ngIf="location.value&&location.invalid&&location.touched" class="text-danger">Location must be 10 characters</div>
+
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label class="labels">Phone</label>
+                    <input type="text" class="form-control"
+                           [ngClass]="{'is-invalid': (phone.touched || phone.dirty) && phone.invalid, 'is-valid': phone.touched && phone.valid}"
+                           placeholder="Enter phone" [(ngModel)]="clinic.Phone" name="phone" #phone="ngModel" required [minlength]="11" [maxlength]="11">
+                    <div *ngIf="phone.touched && !phone.value" class="text-danger">Phone is required</div>
+                    <div *ngIf="phone.value&&phone.invalid&&phone.touched" class="text-danger">Phone must be 11 digits</div>
+                  </div>
+
+
+                  <div class="col-md-12 mb-3">
+                      <label class="labels">Examination</label>
+                      <input type="number" class="form-control" placeholder="Enter examination"
+                      [ngClass]="{'is-invalid': (examination.touched || examination.dirty) && examination.invalid, 'is-valid': examination.touched && examination.valid}"
+
+                      [(ngModel)]="clinic.examination" minlength="2" #examination="ngModel" required>
+                      <div *ngIf="examination.touched && !examination.value" class="text-danger">Examination name is required</div>
+                      <div *ngIf="examination.value&&examination.invalid&&examination.touched" class="text-danger">Examination must be 1 digits</div>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label class="labels">Description</label>
+                    <textarea class="form-control" placeholder="Enter description" [(ngModel)]="clinic.description"
+                    [ngClass]="{'is-invalid': (description.touched || description.dirty) && description.invalid, 'is-valid': description.touched && description.valid}"
+
+                    #description="ngModel"
+                    minlength="50" required></textarea>
+                    <div *ngIf="description.touched && !description.value" class="text-danger">Description name is required</div>
+                    <div *ngIf="description.value&&description.invalid&&description.touched" class="text-danger">Description must be 50 characters</div>
+                  </div>
+                </div>
+
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" (click)="send(i)" [disabled]="!isFormValid(i)">Save Clinic</button></div>
+            </div>
+        </div>
+        <div class="col-md-3 row">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center experience">
+                  <span><i class="bi bi-pencil-square" style="cursor: pointer;color: var(--icon-color);"></i></span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center flex-column experience">
+
+                  <span class="pt-3 w-100 " style="display: flex;justify-content: space-between;align-items: center;">Assistants <button class="btn btn-primary" (click)="addAssistant(i)">Add New</button></span>
+                  <div *ngFor="let assistant of clinic.assist; let j = index" class="col-12 mb-3">
+                      <label class="labels">Assistant name</label>
+                    <input type="text" class="form-control" placeholder="Enter name" [(ngModel)]="assistant.name"
+                    [ngClass]="{'is-invalid': (assname.touched || assname.dirty) && assname.invalid, 'is-valid': assname.touched && assname.valid}"
+                    minlength="3"
+                    #assname="ngModel" required>
+                    <div *ngIf="assname.touched && !assname.value" class="text-danger">Clinic name is required</div>
+                    <div *ngIf="assname.value&&assname.invalid&&assname.touched" class="text-danger">name must be 2 characters</div>
+
+                      <label class="labels">Assistant phone</label>
+                      <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': (assphone.touched || assphone.dirty) && assphone.invalid, 'is-valid': assphone.touched && assphone.valid}"
+                      placeholder="Enter phone" [(ngModel)]="assistant.phone" name="assphone" #assphone="ngModel" required [minlength]="11" [maxlength]="11">
+                      <div *ngIf="assphone.touched && !assphone.value" class="text-danger">Phone is required</div>
+                      <div *ngIf="assphone.value&&assphone.invalid&&assphone.touched" class="text-danger">Phone must be 11 digits</div>
+                  <button  class="btn btn-danger form-control mt-2" (click)="removeAssistant(j,i)">Remove Assistant</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+
+
+
+
+    <!-- toast test -->
+    <div
+    [ngStyle]="reviewed?{'z-index':'5','opacity':'1'}:{'z-index':'-5','opacity':'0'}"
+    class="toasttest toast align-items-center">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{revMessage}}
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+    <!-- end toast test -->
+
+
+    <div class="loader"
+    *ngIf="loader.isLoading|async"
+    ><div class="lds-facebook"><div></div><div></div><div></div></div>
+    </div>

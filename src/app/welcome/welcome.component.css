@@ -1,0 +1,122 @@
+.sideLeft{
+    height: 100vh;
+    background: var(--color_1);
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .sideLeft h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--color_5);
+  }
+  .Alzheimer-color {
+    color: var(--color_3);
+  }
+  .sideLeft img {
+    width:90%;
+    margin-top: 2em;
+  }
+
+
+
+
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fadeInAnimation {
+    animation: fadeIn 1s ease forwards;
+  }
+.btn-login,.btn-sign-up,.btn{
+  font-weight: 500;
+}
+.btn-login{
+  background: white;
+  color: var(--color_2);
+  border-color: var(--color_2);
+  transition: all 0.1s ease;
+}
+.btn-sign-up{
+  background-color: var(--color_1)!important;
+  margin-left: 10px!important;
+  color: white;
+}
+.btn-login:hover{
+  background-color: var(--color_2);
+  color:white
+}
+
+
+
+
+  .row{
+    --bs-gutter-x:0!important;
+  }
+     /*
+     ////////////////////////
+     media
+     ///////////////////////
+     */
+
+     @media (min-width: 425px) and (max-width: 642px){
+      /* Extra small devices (phones) */
+      .custom-font {
+        font-size: 13px; /* Adjust the font size for extra small screens */
+      }
+      .logo{
+        width: 60px!important;
+      }
+    }
+  @media (min-width: 642px) and (max-width: 754px){
+    /* Extra small devices (phones) */
+    .custom-font {
+      font-size: 14px; /* Adjust the font size for extra small screens */
+    }
+    .logo{
+      width: 70px!important;
+    }
+  }
+  @media (min-width: 754px) and (max-width: 874px) {
+    /* Small devices (tablets) */
+    .custom-font {
+      font-size: 18px; /* Adjust the font size for small screens */
+    }
+    .logo{
+      width: 80px!important;
+    }
+  }
+  @media (min-width: 874px) and (max-width: 992px) {
+    /* Medium devices (desktops) */
+    .custom-font {
+      font-size: 20px; /* Adjust the font size for medium screens */
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1024px) {
+    /* Large devices (large desktops) */
+    .custom-font {
+      font-size: 22px; /* Adjust the font size for large screens */
+    }
+  }
+  @media (min-width: 1024px) and (max-width: 1100px) {
+    /* Large devices (large desktops) */
+    .custom-font {
+      font-size: 25px; /* Adjust the font size for large screens */
+    }
+  }
+  @media (min-width: 1100px) and (max-width: 1200px) {
+    /* Large devices (large desktops) */
+    .custom-font {
+      font-size: 27px; /* Adjust the font size for large screens */
+    }
+  }
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    .custom-font {
+      font-size: 30px; /* Adjust the font size for large screens */
+    }
+  }

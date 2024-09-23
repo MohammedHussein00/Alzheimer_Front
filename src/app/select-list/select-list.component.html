@@ -1,0 +1,44 @@
+<div class="select">
+    <div #element1 class="defult" [ngStyle]="!open? {'border-bottom-color': 'var(--defaultBorder)'} : {'border-bottom': '0'}"
+    [ngClass]="{'invalid1':opened&&selectedElement===''}"
+
+    >
+      <i class="bi bi-caret-down-fill" style="pointer-events: none; text-align: center; display: flex; padding: 0 12px; align-content: center; font-size: 12px; flex-wrap: wrap;"
+      [ngClass]="{'iconSelect':open,'invalid1':opened&&selectedElement===''}"
+
+      ></i>
+      <span style="text-align: end;
+      padding: 0 20px;
+      width: 100%;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;">
+        <label  [ngClass]="{'labelActiveColor':open,'labelActive':!open&&selectedElement!='','invalid1':opened&&selectedElement===''}"
+        [ngStyle]="!open&&selectedElement!=''? {'color': 'var(--iconColor)'}:{'color':'var(--iconColor)'}"
+        >Select</label>
+        <p style="font-size: 15px;
+        margin: auto 0 6px;
+        font-weight: 400;
+        color:var(--colorLabel);
+        font-family: Roboto, sans-serif;"
+        *ngIf="open||!open&&selectedElement!=''">{{selectedElement}}</p>
+      </span>
+      <small
+[ngClass]="{'invalid':opened&&selectedElement===''}"
+
+      class="line" [ngStyle]="open ? {'width': '100%'} : {'width': '0'}"></small>
+    </div>
+    <div class="option" id="option" [ngStyle]="open ? {'transform': 'rotateX(0deg)'} : {'transform': 'rotateX(90deg)'}" #parent>
+      <input #input type="text" class="search" [(ngModel)]="inputValue" (input)="compareInput()" *ngIf="moreLength" placeholder="Search for specialization">
+      <ul>
+        <li *ngFor="let x of filteredData; let i=index" [ngClass]="{'active':x.id===active}" (click)="selected(x)">
+          <p [ngClass]="{'activeP':x.id===active}">{{x.name}}</p>
+
+        <span *ngIf="!filteredData.length">not found</span>
+      </ul>
+    </div>
+  </div>
+<p
+[ngStyle]="opened&&selectedElement===''? {'display': 'inline'}:{'display':'none'}"
+class="invalid-feedback"
+>*This field is required</p>

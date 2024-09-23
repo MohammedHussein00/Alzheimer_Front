@@ -1,0 +1,431 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">Doctors</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ data.name ? data.name : 'No name' }}</li>
+  </ol>
+</nav>
+
+<div class="row">
+    <div class="col-8" >
+        <div class="d-flex row  doctor p-5 mb-5" *ngIf="data.name!==''">
+            <div class="col-2">
+              <img *ngIf="data.name!==''" class="docImg" [src]="data.imgUrl || 'assets/profile1.png'" alt="">
+              <app-skeleton-loader *ngIf="data.name===''"  style="height: 57px;display: inline-block;width:57px;border-radius: 50%;" ></app-skeleton-loader>
+
+            </div>
+            <div class="col-7">
+              <h5 *ngIf="data.name!==''">Dr: {{ data.name ? data.name : 'No name' }}</h5>
+              <app-skeleton-loader *ngIf="data.name===''"  style="height: 24px;display: inline-block;width:100%" Cwidth="100" Cheight="100" [circle]="true"></app-skeleton-loader>
+
+
+                <p >Doctor {{data.name}}is a doctor in {{data.specialization }}</p>
+                <div class="d-flex mb-2">
+                  <svg  class="Stethoscope" fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.1 490.1" xml:space="preserve"><g><path d="M463.9,275.85v-52.1c0-38.6-31.3-69.9-69.9-69.9s-69.9,31.3-69.9,69.9v131.3c0,43.8-35.4,79.2-79.2,79.2s-79.2-35.4-79.2-79.2v-46.2c69.6-9.3,124.3-64.5,126.1-131v-123c0-11.5-9.4-20.9-20.9-20.9c-0.4,0-48.1,0-48.1,0c-1.1-10.5-10-18.8-20.7-18.8c-11.5,0-20.9,9.4-20.9,20.9v37.5c0,11.5,9.4,20.9,20.9,20.9c10.8,0,18.8-8.3,20.6-18.8h27.4v102.2c0,50-46.9,90.7-104.3,90.7c-57.3,0-104.3-40.7-104.3-90.7V75.65h26.2c1.1,10.5,10,18.8,20.7,18.8c11.5,0,19.8-9.4,20.9-20.9v-37.5c0-11.5-9.4-20.9-20.9-20.9c-10.8,0-19.7,8.3-20.7,18.8h-47C9.4,33.95,0,43.35,0,54.75v123c0,66.5,53.7,121.8,124.1,131v46.3c0,65.7,54.2,119.9,119.9,119.9c66.7,0,119.9-53.2,122-119.9v-131.4c0-15.6,12.5-28.1,28.1-28.1s28.1,12.5,28.1,28.1v51.4c-16.5,7.7-28.1,24.5-28.1,43.5c0,26.1,20.9,48,48,48c26.1,0,48-20.9,48-48C490,300.15,479.6,283.85,463.9,275.85z M442,325.85c-4.2,0-7.3-3.1-7.3-7.3s3.1-7.3,7.3-7.3c4.2,0,7.3,4.2,7.3,7.3C449.3,322.75,446.2,325.85,442,325.85z"/></g></svg>
+                  <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">{{data.specialization}}</div>
+                </div>
+                <div class="d-flex mb-2" *ngIf="data.clinics.length===0">
+                  <i class="bi bi-geo-alt-fill" style="color: var(--color_1);margin-right: 22px;"></i>
+                  <div class="info"  style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">There is no clinics</div>
+                </div>
+                <div class="d-flex mb-2">
+                  <i class="bi bi-geo-alt-fill" style="color: var(--color_1);margin-right: 22px;"></i>
+                  <div class="info"  style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">{{data.clinics[0].location}}</div>
+                </div>
+                <div class="d-flex  mb-2" *ngIf="data.clinics.length===0">
+                  <i class="bi bi-currency-dollar" style="color: var(--color_1);margin-right: 22px;"></i>
+                  <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">There is no clinics</div>
+                </div>
+                <div class="d-flex  mb-2" >
+                  <i class="bi bi-currency-dollar" style="color: var(--color_1);margin-right: 22px;"></i>
+                  <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">{{data.clinics[0].examination}} L.E</div>
+                </div>
+                <div class="d-flex mb-2">
+                  <i class="bi bi-telephone" style="color: var(--color_1);margin-right: 22px;"></i>
+                  <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">{{data.phoneNumber}}</div>
+                </div>
+            </div>
+
+            <div class="col-3 rate-booking">
+              <div>
+                <span>
+                  <div class="star-rating">
+                    <span [ngStyle]="{'width': calcRating(data.rate1,data.rate2,data.rate3,data.rate4,data.rate5)*100/5+'%'}"></span>
+                  </div>                </span>
+                <p style="text-align: center;">({{calcRating(
+                  data.rate1,data.rate2,data.rate3,data.rate4,data.rate5) ? calcRating(
+                    data.rate1,data.rate2,data.rate3,data.rate4,data.rate5) : '0'}})</p>
+              </div>
+
+            </div>
+
+            <div class="col-12 d-flex">
+              <button class="btn btn-sign-up" data-bs-toggle="modal" data-bs-target="#exampleModal">Write comment</button>
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Write Your Comment</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="comment" class="form-label">Rate:</label>
+                          <div *ngFor="let rating of [1, 2, 3, 4, 5]; let i = index" class="d-flex justify-content-between">
+                            <span>
+                              <input type="checkbox" [name]="'rating' + rating" [value]="rating" [(ngModel)]="checkboxStates[i]" (change)="updateSelectedRating(i)" style="margin-right: 10px;">
+                              <ng-container *ngFor="let starIndex of [1, 2, 3, 4, 5]">
+                                <i [ngClass]="{'bi-star-fill': starIndex <= rating, 'bi-star': starIndex > rating}" style="color: var(--color_1);position:static"></i>
+                              </ng-container>
+                            </span>
+                          </div>
+
+
+
+
+                        </div>
+                        <div class="mb-3">
+                          <label for="comment" class="form-label">Comment:</label>
+                          <textarea #review class="form-control" id="comment" rows="3" ></textarea>
+                          <p style="color: red;">{{revMessage}}</p>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addNewReview()">Add your review</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="data.name===''">
+          <div class="d-flex doctor p-lg-5 p-md-3 p-sm-2 mb-5 row" *ngFor="let doctor of [1]" >
+              <div class="col-2">
+                <app-skeleton-loader   style="height: 97px;display: inline-block;width:97px;border-radius: 50%;" ></app-skeleton-loader>
+              </div>
+              <div class="col-7">
+                <app-skeleton-loader   style="height: 20px;display: inline-block;width:77%"></app-skeleton-loader>
+                <app-skeleton-loader   style="height: 20px;display: inline-block;width:70%"></app-skeleton-loader>
+                <app-skeleton-loader   style="height: 20px;display: inline-block;width:79%" ></app-skeleton-loader>
+                <app-skeleton-loader   style="height: 20px;display: inline-block;width:80%" ></app-skeleton-loader>
+                <app-skeleton-loader   style="height: 20px;display: inline-block;width:61%"></app-skeleton-loader>
+                <app-skeleton-loader   style="height: 20px;display: inline-block;width:65%"></app-skeleton-loader>
+        
+              </div>
+        
+              <div class="col-3 rate-booking">
+                
+                  
+                  <div class="w-100">
+                    <app-skeleton-loader   style="height: 20px;display: inline-block;width:80%;margin:auto;"></app-skeleton-loader>
+                    <app-skeleton-loader   style="height: 20px;display: inline-block;width:50%;margin:auto;"></app-skeleton-loader>
+                  </div>
+        
+        
+                
+        
+              </div>
+              <div class="col-12">
+                <app-skeleton-loader   style="height: 40px;display: inline-block;width:100%"></app-skeleton-loader>
+              </div>
+        
+          </div>
+
+        </div>
+
+
+
+          <div class="d-flex flex-column doctor p-5 mb-5">
+              <div style="color: var(--icon-color);font-size:20px;margin-bottom: 20px;">
+                <i class="bi bi-hospital" style="margin-right: 20px;color:var(--color_1);font-size: 20px;"></i>
+                Information about Doctor
+                </div>
+
+
+              <div class="row " style="height: 100px;">
+                {{data.aboutDoctor}}
+                  </div>
+
+
+          </div>
+
+
+
+
+
+          <div class="d-flex flex-column doctor p-5 mb-5" *ngFor="let clinic of data.clinics">
+              <div style="color: var(--icon-color);font-size:20px;margin-bottom: 20px;">
+                <i class="bi bi-hospital" style="margin-right: 20px;color:var(--color_1);font-size: 20px;"></i>
+                 {{clinic.name}} Clinic
+                </div>
+                <p>
+                  <i class="bi bi-geo-alt" style="margin-right: 20px;color:var(--color_1);font-size: 20px;"></i>
+                  {{clinic.location}}
+                </p>
+                <p>
+                  <i class="bi bi-currency-dollar" style="margin-right: 20px;color:var(--color_1);font-size: 20px;"></i>
+                  {{clinic.examination}}
+                </p>
+                <p>
+                  <i class="bi bi-file-earmark-ppt-fill" style="margin-right: 20px;color:var(--color_1);font-size: 20px;"></i>
+                  {{clinic.discription}}
+                </p>
+                <p>
+                  <i class="bi bi-images" style="margin-right: 20px;color:var(--color_1);font-size: 20px;"></i>
+                  Images
+                </p>
+
+              <div class="row " >
+
+                <img *ngFor="let image of clinic.images" class="col-lg-3 col-ml-4 col-ms-6" src="{{image.imageUrl}}" alt="">
+              </div>
+              <hr style="color: var(--icon-color);">
+              <p style="color: var(--icon-color);margin-top: 20px;">
+                <i class="bi bi-people" style="margin-right: 20px;color:var(--color_1);font-size: 20px;"></i>
+
+                Assistants
+              </p>
+              <div *ngFor="let assistant of clinic.assistants" style="color: var(--icon-color);margin-bottom: 20px;">
+                <i class="bi bi-person-fill" style="margin-right: 20px;color:var(--color_1);font-size: 15px;"></i>
+                 {{clinic.name}}
+                 <p>
+                   <i class="bi bi-phone" style="margin-right: 20px;color:var(--color_1);font-size: 15px;"></i>
+                   {{assistant.number}}
+                 </p>
+                </div>
+
+
+          </div>
+
+
+
+
+          <div class="d-flex flex-column doctor p-5 mb-5">
+            <div style="color: var(--icon-color);font-size:20px;margin-bottom: 20px;">
+              <i class="bi bi-star-half" style="margin-right: 20px;color:var(--color_1);font-size: 20px;"></i>
+              Pateints rate
+              </div>
+
+
+            <div class="row " >
+                <div class="row mb-5" *ngFor="let rate of data.review ;let i=index">
+                  <img class="pateint-img col-lg-2 col-md-2 col-sm-3" style="border-radius: 50%;" src="assets/01.jpg" alt="">
+                  <div class="col-lg-7 col-md-7 col-sm-6">
+                    <p>{{rate.name}}</p>
+                    <p>{{rate.review}}</p>
+
+                    <div class="d-flex">
+                      <span class="d-flex w-50">
+                        <svg (click)="incrementLikes(i)" class="svg-inline--fa fa-thumbs-up g-color" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="thumbs-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path [ngStyle]="{fill: liked[i] ? 'blue' : ''}" fill="currentColor" d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"></path></svg>
+                        {{rate.likes}}
+                      </span>
+                      <span class="d-flex w-50">
+                        <svg (click)="incrementDislikes(i)" style="transform: rotateX(180deg);"  class="svg-inline--fa fa-thumbs-up g-color" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="thumbs-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path [ngStyle]="{fill: disliked[i] ? 'blue' : ''}" fill="currentColor" d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"></path></svg>
+                        {{rate.dislikes}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-4 rate-booking">
+                    <div class="d-flex flex-column">
+                      <span style="padding-bottom: 10px;">
+                        <i *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{'bi-star-fill': star <= rate.numOfStars, 'bi-star': star > rate.numOfStars}" style="color: var(--color_1);"></i>
+                      </span>
+                      <p style="margin-bottom: 0;">{{rate.date}}</p>
+                    </div>
+
+                  </div>
+                  <hr style="margin-top: 20px;">
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+      </div>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+    <div class="d-flex col-4" style="padding-left: 20px;">
+      <div class="doctor w-100" style="height: fit-content;">
+        <span class="filter-header"><i class="bi bi-bookmark-check-fill" style="margin-right: 10px;"></i>Booking information</span>
+        <div class="p-3 d-flex justify-content-between flex-column align-items-center">
+          <p>Booking</p>
+          <p>A medical</p>
+        </div>
+          <hr>
+
+
+
+
+
+          <div class="d-flex justify-content-between p-3">
+            <div id="carouselExampleControlsNoTouching" class="carousel slide  col-lg-4 col-md-5 w-100" data-bs-touch="false" data-bs-interval="false"
+            style="text-align: center;"
+            >
+              <div class="carousel-inner" >
+                <div class="carousel-item" style="color:var(--icon-color);" [ngClass]="{'active': a === 0}" *ngFor="let clinic of data.clinics; let a=index;">
+                  {{clinic.name}}
+                </div>
+
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="border-bottom: 2px solid var(--color_1);border-left: 2px solid var(--color_1);padding: 5px;transform: rotate(45deg);background-image: none;"
+                (click)="nextClinic()"
+                ></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" style="border-bottom: 2px solid var(--color_1);border-right: 2px solid var(--color_1);padding: 5px;transform: rotate(-45deg);background-image: none;"
+                (click)="previousClinic()"
+                ></span>
+              </button>
+            </div>
+          </div>
+          <div class="p-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <span style="display:flex;width: 10px;height: 10px;border-top: 2px solid var(--color_1);border-left: 2px solid var(--color_1);transform: rotate(-45deg);" (click)="previousWeek()"></span>
+              <div>
+
+              <h6>{{ schedule[currentIndex].day }}, {{ schedule[currentIndex].date | date: 'longDate' }}</h6>
+              <ul>
+                <li class="shift" *ngFor="let timeRange of currDay; let x=index"
+                data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal'+x"
+                [ngStyle]="timeRange.available?{'background':'var(--color_1)'}:{'background':'#a5a2a2','pointer-events':'none'}"
+                                > {{ convertToTimeFormat(timeRange.startTime) }}
+                - {{ convertToTimeFormat(timeRange.endTime) }}
+
+
+
+                </li>
+              </ul>
+            </div>
+              <span style="display:flex;width: 10px;height: 10px;border-top: 2px solid var(--color_1);border-right: 2px solid var(--color_1);transform: rotate(45deg);" class="next" (click)="nextWeek()"></span>
+            </div>
+          </div>
+
+
+
+        <hr>
+
+    </div>
+    </div>
+
+
+
+    <!-- toast test -->
+    <div
+    [ngStyle]="reviewed?{'z-index':'5','opacity':'1'}:{'z-index':'-5','opacity':'0'}"
+    class="toasttest toast align-items-center">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{revMessage}}
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+    <!-- end toast test -->
+
+
+                          <!-- booking popup -->
+
+                          <div *ngFor="let timeRange of currDay; let x=index"  class="modal fade" id="exampleModal{{x}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel{{x}}">Book now</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="d-flex justify-content-between">
+                                    <span class="d-flex align-items-center">
+                                      <i class="position-static bi bi-hospital"></i>
+                                      <p style="margin-left: 15px;margin-bottom: 0;">{{data.clinics[selectedClinic].name}}</p>
+                                    </span>
+                                    <span>
+                                      <i class="position-static bi bi-currency-dollar"></i>
+                                        {{data.clinics[selectedClinic].examination}} E.L
+                                    </span>
+
+                                  </div>
+                                  <hr>
+                                  <form>
+                                    <div class="mb-3 text-center">
+                                      <label for="comment" class="form-label">Booking information</label>
+                                        <div >
+                                          <small>{{ convertToTimeFormat(timeRange.startTime) }}</small>
+                                          <br>
+                                          {{ schedule[currentIndex].day }}, {{ schedule[currentIndex].date | date: 'longDate' }}
+                                        </div>
+
+
+
+
+                                    </div>
+                                    <div class="row justify-content-center">
+                                      <div class="input-group mb-2 col-8 justify-content-center">
+                                        <i class="i bi bi-person-fill" ></i>
+
+                                        <input type="text"  placeholder="Name" class="input-detials is-invalid" name="password"
+                                         [(ngModel)]="appointment.patientName" [ngModelOptions]="{standalone: true}"
+                                        >
+                                      </div>
+                                      <div class="input-group mb-2  col-8 justify-content-center">
+                                        <i class="i bi bi-envelope" ></i>
+
+                                        <input type="email"  placeholder="Email" class="input-detials is-invalid" name="password"
+                                        [value]="data.email" [(ngModel)]="appointment.patientEmail" [ngModelOptions]="{standalone: true}"
+                                        >
+                                      </div>
+                                      <div class="input-group mb-2  col-8 justify-content-center">
+                                        <i class="i bi bi-telephone-fill" ></i>
+
+                                        <input type="text"  placeholder="Phone" class="input-detials is-invalid" name="password"
+                                        [value]="data.phoneNumber" [(ngModel)]="appointment.patientPhone" [ngModelOptions]="{standalone: true}"
+                                        >
+                                      </div>
+                                      <div class="col-10 mb-2 justify-content-between">
+
+                                        <input type="checkbox" [(ngModel)]="appointment.bookingToOther">
+                                        <span>
+                                        I am making this book on behalf of someone else
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" >Cancel</button>
+                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="bookAppointment(timeRange.shiftId)">Book</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <!--End booking popup -->
+
+
+

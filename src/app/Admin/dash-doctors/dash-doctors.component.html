@@ -1,0 +1,166 @@
+
+
+
+<div class="d-flex justify-content-between mb-5">
+    <form class="d-flex " role="search" [formGroup]="clearForm" (ngSubmit)="filterByName()">
+      <div class="input-group input-search-parent">
+          <div class="input-group-prepend input-search-parent">
+              <span class="input-group-text input-search-parent" id="search-addon" style="border:0;">
+                  <i class="bi bi-search" style="color:var(--icon-color)"></i>
+              </span>
+          </div>
+          <input id="inputSearch" class="input-search-parent" type="text" style="outline: none; border: 0;color:var(--icon-color)"
+                 placeholder="Search" aria-label="Search" aria-describedby="search-addon"
+                 formControlName="inputVal" (focus)="handleFocus()" (blur)="handleBlur()">
+          <i id="clear" class="bi bi-x" style="margin: auto; font-size: 25px; position: absolute; right: 0;color:var(--icon-color)"
+             [style.opacity]="showClear ? '1' : '0'" (click)="clearValue()"></i>
+      </div>
+      <button type="submit" (click)="filterByName()" class="search-btn btn btn-outline-primary ml-2" style="background-color: #6973e3; border-radius: 3px; color: white">
+          Search
+      </button>
+  </form>
+    <div class="d-flex justify-content-between">
+      <div class="btn-primary">All</div>
+      <div class="btn-light">Accepted</div>
+      <div class="btn-light">Not Accepted</div>
+    </div>
+   </div>
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12" >
+    <div class="d-flex doctor p-lg-5 p-md-3 p-sm-2 mb-5" *ngFor="let doctor of doctors" [routerLink]="['/dash/dr',doctor.id]">
+        <div class="col-2">
+          <img class="docImg" [src]="doctor.imgUrl ? doctor.imgUrl : 'assets/01.jpg'" alt="">
+        </div>
+        <div class="col-4">
+            <h5>Dr: {{doctor.name}}
+            </h5>
+            <p >{{doctor.smallTip}}</p>
+            <div class="d-flex mb-2">
+              <svg  class="Stethoscope" fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.1 490.1" xml:space="preserve"><g><path d="M463.9,275.85v-52.1c0-38.6-31.3-69.9-69.9-69.9s-69.9,31.3-69.9,69.9v131.3c0,43.8-35.4,79.2-79.2,79.2s-79.2-35.4-79.2-79.2v-46.2c69.6-9.3,124.3-64.5,126.1-131v-123c0-11.5-9.4-20.9-20.9-20.9c-0.4,0-48.1,0-48.1,0c-1.1-10.5-10-18.8-20.7-18.8c-11.5,0-20.9,9.4-20.9,20.9v37.5c0,11.5,9.4,20.9,20.9,20.9c10.8,0,18.8-8.3,20.6-18.8h27.4v102.2c0,50-46.9,90.7-104.3,90.7c-57.3,0-104.3-40.7-104.3-90.7V75.65h26.2c1.1,10.5,10,18.8,20.7,18.8c11.5,0,19.8-9.4,20.9-20.9v-37.5c0-11.5-9.4-20.9-20.9-20.9c-10.8,0-19.7,8.3-20.7,18.8h-47C9.4,33.95,0,43.35,0,54.75v123c0,66.5,53.7,121.8,124.1,131v46.3c0,65.7,54.2,119.9,119.9,119.9c66.7,0,119.9-53.2,122-119.9v-131.4c0-15.6,12.5-28.1,28.1-28.1s28.1,12.5,28.1,28.1v51.4c-16.5,7.7-28.1,24.5-28.1,43.5c0,26.1,20.9,48,48,48c26.1,0,48-20.9,48-48C490,300.15,479.6,283.85,463.9,275.85z M442,325.85c-4.2,0-7.3-3.1-7.3-7.3s3.1-7.3,7.3-7.3c4.2,0,7.3,4.2,7.3,7.3C449.3,322.75,446.2,325.85,442,325.85z"/></g></svg>
+              <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">{{doctor.specialization}}</div>
+            </div>
+            <div class="d-flex mb-2">
+              <i class="bi bi-geo-alt-fill" style="color: var(--dash-color);margin-right: 22px;"></i>
+              <div class="info"  style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">{{doctor.location}}</div>
+            </div>
+            <div class="d-flex  mb-2">
+              <i class="bi bi-currency-dollar" style="color: var(--dash-color);margin-right: 22px;"></i>
+              <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">{{doctor.examination}} L.E</div>
+            </div>
+            <div class="d-flex mb-2">
+              <i class="bi bi-telephone" style="color: var(--dash-color);margin-right: 22px;"></i>
+              <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">{{doctor.phoneNumber}}</div>
+            </div>
+        </div>
+
+        <div class="col-3 rate-booking">
+          <div>
+            <span>
+              <div class="star-rating">
+                <span [ngStyle]="{'width': calcRating(doctor.rate1,doctor.rate2,doctor.rate3,doctor.rate4,doctor.rate5)*100/5+'%'}"></span>
+              </div>
+            </span>
+            <p>({{calcRating(
+              doctor.rate1,doctor.rate2,doctor.rate3,doctor.rate4,doctor.rate5)
+                }})</p>
+
+
+          </div>
+            <div *ngIf="doctor.phoneNumberConfirmed" class="btn-parimary ">Accepted</div>
+            <div *ngIf="!doctor.phoneNumberConfirmed" class="btn-light ">Not Accepted</div>
+          </div>
+          <div class="col-3 p-2">
+            <img style="width: 100%;"  [src]="doctor.certification ? doctor.certification : 'assets/01.jpg'" alt="">
+          </div>
+        </div>
+
+
+    </div>
+<!--
+    <div class="d-flex doctor p-5 ">
+        <div class="col-2">
+          <img class="docImg" src="assets/01.jpg" alt="">
+        </div>
+        <div class="col-7">
+            <h5>Dr: Mohammed Hussein
+            </h5>
+            <p >Professor (M) Urology - Kasr Al-Aini Faculty of Medicine, Cairo University</p>
+            <div class="d-flex mb-2">
+              <svg  class="Stethoscope" fill="#000000" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.1 490.1" xml:space="preserve"><g><path d="M463.9,275.85v-52.1c0-38.6-31.3-69.9-69.9-69.9s-69.9,31.3-69.9,69.9v131.3c0,43.8-35.4,79.2-79.2,79.2s-79.2-35.4-79.2-79.2v-46.2c69.6-9.3,124.3-64.5,126.1-131v-123c0-11.5-9.4-20.9-20.9-20.9c-0.4,0-48.1,0-48.1,0c-1.1-10.5-10-18.8-20.7-18.8c-11.5,0-20.9,9.4-20.9,20.9v37.5c0,11.5,9.4,20.9,20.9,20.9c10.8,0,18.8-8.3,20.6-18.8h27.4v102.2c0,50-46.9,90.7-104.3,90.7c-57.3,0-104.3-40.7-104.3-90.7V75.65h26.2c1.1,10.5,10,18.8,20.7,18.8c11.5,0,19.8-9.4,20.9-20.9v-37.5c0-11.5-9.4-20.9-20.9-20.9c-10.8,0-19.7,8.3-20.7,18.8h-47C9.4,33.95,0,43.35,0,54.75v123c0,66.5,53.7,121.8,124.1,131v46.3c0,65.7,54.2,119.9,119.9,119.9c66.7,0,119.9-53.2,122-119.9v-131.4c0-15.6,12.5-28.1,28.1-28.1s28.1,12.5,28.1,28.1v51.4c-16.5,7.7-28.1,24.5-28.1,43.5c0,26.1,20.9,48,48,48c26.1,0,48-20.9,48-48C490,300.15,479.6,283.85,463.9,275.85z M442,325.85c-4.2,0-7.3-3.1-7.3-7.3s3.1-7.3,7.3-7.3c4.2,0,7.3,4.2,7.3,7.3C449.3,322.75,446.2,325.85,442,325.85z"/></g></svg>
+              <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">Pediatrician and neonatologist specializing in children, newborns, weight loss, pediatric nutrition, and pediatric allergy and immunity.</div>
+            </div>
+            <div class="d-flex mb-2">
+              <i class="bi bi-geo-alt-fill" style="color: var(--dash-color);margin-right: 22px;"></i>
+              <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">Pediatrician and neonatologist specializing in children, newborns, weight loss, pediatric nutrition, and pediatric allergy and immunity.</div>
+            </div>
+            <div class="d-flex  mb-2">
+              <i class="bi bi-currency-dollar" style="color: var(--dash-color);margin-right: 22px;"></i>
+              <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">22 L.E</div>
+            </div>
+            <div class="d-flex mb-2">
+              <i class="bi bi-telephone" style="color: var(--dash-color);margin-right: 22px;"></i>
+              <div class="info" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-right: 5px;">01019974673</div>
+            </div>
+        </div>
+
+        <div class="col-3 rate-booking">
+          <div>
+            <span>
+              <i class="bi bi-star-fill" style="color: var(--dash-color);"></i>
+              <i class="bi bi-star-fill" style="color: var(--dash-color);"></i>
+              <i class="bi bi-star-fill" style="color: var(--dash-color);"></i>
+              <i class="bi bi-star-fill" style="color: var(--dash-color);"></i>
+              <i class="bi bi-star-half" style="color: var(--dash-color);"></i>
+            </span>
+            <p>(4.9)</p>
+          </div>
+          <button class="btn btn-sign-up" routerLink="/register">Book now</button>
+
+        </div>
+
+
+    </div> -->
+</div>
+
+
+
+<div class="col-lg-12 col-md-12 col-sm-12" *ngIf="!doctors[0]">
+  <div class="d-flex doctor p-lg-5 p-md-3 p-sm-2 mb-5" *ngFor="let doctor of [1,2]" >
+      <div class="col-2">
+        <app-skeleton-loader *ngIf="doctors"  style="height: 138px;display: inline-block;width:138px;border-radius: 50%;" ></app-skeleton-loader>
+      </div>
+      <div class="col-7">
+        <app-skeleton-loader   style="height: 20px;display: inline-block;width:77%"></app-skeleton-loader>
+        <app-skeleton-loader   style="height: 20px;display: inline-block;width:70%"></app-skeleton-loader>
+        <app-skeleton-loader   style="height: 20px;display: inline-block;width:79%" ></app-skeleton-loader>
+        <app-skeleton-loader   style="height: 20px;display: inline-block;width:80%" ></app-skeleton-loader>
+        <app-skeleton-loader   style="height: 20px;display: inline-block;width:61%"></app-skeleton-loader>
+        <app-skeleton-loader   style="height: 20px;display: inline-block;width:65%"></app-skeleton-loader>
+
+      </div>
+
+      <div class="col-3 rate-booking">
+        <div>
+          <span>
+            <!-- <div class="star-rating">
+              <span [ngStyle]="{'width': calcRating(doctor.rate1,doctor.rate2,doctor.rate3,doctor.rate4,doctor.rate5)*100/5+'%'}"></span>
+            </div> -->
+          </span>
+          <!-- <p>({{calcRating(
+            doctor.rate1,doctor.rate2,doctor.rate3,doctor.rate4,doctor.rate5)
+              }})</p> -->
+
+
+        </div>
+        <button class="btn btn-sign-up" routerLink="/register">Book now</button>
+
+      </div>
+
+
+  </div>
+</div>
+
+
+
+
+

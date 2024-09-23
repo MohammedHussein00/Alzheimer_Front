@@ -1,0 +1,32 @@
+
+.main{
+  background-color: var(--main-class-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .row{
+    --bs-gutter-x:0!important;
+  }
+     /*
+     ////////////////////////
+     media
+     ///////////////////////
+     */

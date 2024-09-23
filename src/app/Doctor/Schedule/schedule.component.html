@@ -1,0 +1,434 @@
+<div class="loader"
+*ngIf="loader.isLoading|async"
+><div class="lds-facebook"><div></div><div></div><div></div></div>
+</div>
+
+
+<!-- Navigation breadcrumb -->
+<nav aria-label="breadcrumb" style="color: var(--icon-color); margin-bottom: 20px;">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" style="color: var(--icon-color)">Schedule</li>
+    <li class="breadcrumb-item active" aria-current="page" style="color: var(--icon-color)">
+      Dr: Mohammed Hussein
+    </li>
+  </ol>
+</nav>
+
+<!-- Schedule form -->
+<div class="row doctor justify-content-center">
+      <!-- Clinics -->
+      <div class="d-flex justify-content-between p-4">
+        <h6>Schedule of Clinic {{schedules[selectedClinic]?.name}}</h6>
+        <div id="carouselExampleControlsNoTouching" class="carousel slide  col-lg-4 col-md-5" data-bs-touch="false" data-bs-interval="false"
+        style="text-align: center;"
+        >
+          <div class="carousel-inner" >
+            <div class="carousel-item" style="color:var(--icon-color);" [ngClass]="{'active': a === 0}" *ngFor="let clinic of schedules; let a=index;">
+              {{clinic?.name}}
+            </div>
+
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+            <div class="next " aria-hidden="true" style="border-bottom: 2px solid var(--color_1);border-left: 2px solid var(--color_1);padding: 5px;transform: rotate(45deg);background-image: none;width:10px!important;height:10px!important;"
+            (click)="nextClinic()"
+            ></div>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+            <div class="next carousel-control-next-icon"  style="border-bottom: 2px solid var(--color_1);border-right: 2px solid var(--color_1);padding: 5px;transform: rotate(-45deg);background-image: none;    width: 10px!important;
+            height: 10px;"
+            (click)="previousClinic()"
+            ></div>
+          </button>
+        </div>
+      </div>
+
+
+
+
+  <div class="col-9">
+
+
+    <!-- Weekly working hours -->
+    <div class="d-flex row doctor p-5 mb-5">
+      <div class="col-12 d-flex row pb-2">
+        <h6 class="col-4">Weekly working hours</h6>
+        <span class="d-flex col-8">
+          <span class="d-flex justify-content-between col-8">
+            <p style="width: 40%;">Start</p>
+            <p style="width: 40%;">End</p>
+          </span>
+        </span>
+      </div>
+
+      <!-- Day schedule -->
+      <div class="col-12 row">
+        <div *ngFor="let day of days;let i = index;">
+          <div class="d-flex justify-content-between" style="padding: 10px; border-radius: 5px; margin-bottom: 20px; background: var(--scheduleBG);">
+            <div class="form-check form-switch d-flex align-items-center col-4">
+              <input class="form-check-input" type="checkbox" role="switch"
+                     [(ngModel)]="day.visible"
+                     id="{{'flexSwitchCheckDefault' + day.name}}"
+                     style="margin-left: 0; margin-right: 10px; color:var(--icon-color)"/>
+              <label class="form-check-label" for="{{'flexSwitchCheckDefault' + day.name}}">{{ day.name }}</label>
+            </div>
+
+            <!-- Shifts -->
+            <div class="container" *ngIf="day.visible">
+
+              <div *ngIf="day.name==='Sunday'" class="d-flex align-items-center justify-content-end p-3" style="color: #5555ff; cursor: pointer; font-size: 11px;">
+                <i class="bi bi-plus" style="font-size: 18px;"></i>
+                <a (click)="addShift(day, selectedClinic)">Add shift</a>
+              </div>
+
+              <div *ngIf="day.name === 'Monday'" class="d-flex align-items-center justify-content-end p-3" style="color: #5555ff; cursor: pointer; font-size: 11px;">
+                <i class="bi bi-plus" style="font-size: 18px;"></i>
+                <a (click)="addShift(day, selectedClinic)">Add shift</a>
+              </div>
+
+              <div *ngIf="day.name === 'Saturday'" class="d-flex align-items-center justify-content-end p-3" style="color: #5555ff; cursor: pointer; font-size: 11px;">
+                <i class="bi bi-plus" style="font-size: 18px;"></i>
+                <a (click)="addShift(day, selectedClinic)">Add shift</a>
+              </div>
+              <div *ngIf="day.name === 'Tuesday'" class="d-flex align-items-center justify-content-end p-3" style="color: #5555ff; cursor: pointer; font-size: 11px;">
+                <i class="bi bi-plus" style="font-size: 18px;"></i>
+                <a (click)="addShift(day, selectedClinic)">Add shift</a>
+              </div>
+              <div *ngIf="day.name === 'Wednesday'" class="d-flex align-items-center justify-content-end p-3" style="color: #5555ff; cursor: pointer; font-size: 11px;">
+                <i class="bi bi-plus" style="font-size: 18px;"></i>
+                <a (click)="addShift(day, selectedClinic)">Add shift</a>
+              </div>
+              <div *ngIf="day.name === 'Thursday'" class="d-flex align-items-center justify-content-end p-3" style="color: #5555ff; cursor: pointer; font-size: 11px;">
+                <i class="bi bi-plus" style="font-size: 18px;"></i>
+                <a (click)="addShift(day, selectedClinic)">Add shift</a>
+              </div>
+              <div *ngIf="day.name === 'Friday'" class="d-flex align-items-center justify-content-end p-3" style="color: #5555ff; cursor: pointer; font-size: 11px;">
+                <i class="bi bi-plus" style="font-size: 18px;"></i>
+                <a (click)="addShift(day, selectedClinic)">Add shift</a>
+              </div>
+
+
+              <div *ngFor="let shift of schedules[selectedClinic].shifts;let shiftIndex=index;  let l = last" class="d-flex flex-column" >
+
+
+
+
+                <div *ngIf="shift.day==='Sat'&&i===6" class="d-flex align-items-center justify-content-between col-12 mb-3">
+                  <div class="d-flex align-items-center justify-content-between col-8">
+                    <div style="position: relative; width: 40%;">
+
+
+
+
+
+               <input type="time" [(ngModel)]="shift.startTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                    <div style="position: relative; width: 40%;">
+
+               <input type="time" [(ngModel)]="shift.endTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                  </div>
+
+                  <span class="d-flex align-items-center" style="color: #ff3131; cursor: pointer; font-size: 11px;">
+                    <i class="bi bi-x" style="font-size: 18px;"></i>
+                    <a (click)="removeShift(day, shiftIndex)">Remove shift</a>
+                  </span>
+                </div>
+
+
+
+
+
+                <div *ngIf="shift.day==='Sun'&&i===0" class="d-flex align-items-center justify-content-between col-12 mb-3">
+                  <div class="d-flex align-items-center justify-content-between col-8">
+                    <div style="position: relative; width: 40%;">
+
+
+
+
+
+               <input type="time" [(ngModel)]="shift.startTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                    <div style="position: relative; width: 40%;">
+
+               <input type="time" [(ngModel)]="shift.endTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                  </div>
+
+                  <span class="d-flex align-items-center" style="color: #ff3131; cursor: pointer; font-size: 11px;">
+                    <i class="bi bi-x" style="font-size: 18px;"></i>
+                    <a (click)="removeShift(day, shiftIndex)">Remove shift</a>
+                  </span>
+                </div>
+
+
+
+
+                <div *ngIf="shift.day==='Mon'&&i===1" class="d-flex align-items-center justify-content-between col-12 mb-3">
+                  <div class="d-flex align-items-center justify-content-between col-8">
+                    <div style="position: relative; width: 40%;">
+
+
+
+
+               <input type="time" [(ngModel)]="shift.startTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                    <div style="position: relative; width: 40%;">
+
+               <input type="time" [(ngModel)]="shift.endTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                  </div>
+
+                  <span class="d-flex align-items-center" style="color: #ff3131; cursor: pointer; font-size: 11px;">
+                    <i class="bi bi-x" style="font-size: 18px;"></i>
+                    <a (click)="removeShift(day, shiftIndex)">Remove shift</a>
+                  </span>
+                </div>
+
+
+
+
+
+                <div *ngIf="shift.day==='Tue'&&i===2" class="d-flex align-items-center justify-content-between col-12 mb-3">
+                  <div class="d-flex align-items-center justify-content-between col-8">
+                    <div style="position: relative; width: 40%;">
+
+
+
+
+               <input type="time" [(ngModel)]="shift.startTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                    <div style="position: relative; width: 40%;">
+
+               <input type="time" [(ngModel)]="shift.endTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                  </div>
+                  <span *ngIf="l" class="d-flex align-items-center" style="color: #5555ff; cursor: pointer; font-size: 11px;">
+                    <i class="bi bi-plus" style="font-size: 18px;"></i>
+                    <a (click)="addShift(day,selectedClinic)">Add shift</a>
+                  </span>
+                  <span *ngIf="!l && schedules[selectedClinic].shifts.length > 1" class="d-flex align-items-center" style="color: #ff3131; cursor: pointer; font-size: 11px;">
+                    <i class="bi bi-x" style="font-size: 18px;"></i>
+                    <a (click)="removeShift(day, shiftIndex)">Remove shift</a>
+                  </span>
+                </div>
+
+
+
+
+                <div *ngIf="shift.day==='Wed'&&i===3" class="d-flex align-items-center justify-content-between col-12 mb-3">
+                  <div class="d-flex align-items-center justify-content-between col-8">
+                    <div style="position: relative; width: 40%;">
+
+
+
+
+               <input type="time" [(ngModel)]="shift.startTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                    <div style="position: relative; width: 40%;">
+
+               <input type="time" [(ngModel)]="shift.endTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                  </div>
+
+                  <span class="d-flex align-items-center" style="color: #ff3131; cursor: pointer; font-size: 11px;">
+                    <i class="bi bi-x" style="font-size: 18px;"></i>
+                    <a (click)="removeShift(day, shiftIndex)">Remove shift</a>
+                  </span>
+                </div>
+
+
+
+
+
+                <div *ngIf="shift.day==='Thu'&&i===4" class="d-flex align-items-center justify-content-between col-12 mb-3">
+                  <div class="d-flex align-items-center justify-content-between col-8">
+                    <div style="position: relative; width: 40%;">
+
+
+
+
+               <input type="time" [(ngModel)]="shift.startTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                    <div style="position: relative; width: 40%;">
+
+               <input type="time" [(ngModel)]="shift.endTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                  </div>
+
+                  <span  class="d-flex align-items-center" style="color: #ff3131; cursor: pointer; font-size: 11px;">
+                    <i class="bi bi-x" style="font-size: 18px;"></i>
+                    <a (click)="removeShift(day, shiftIndex)">Remove shift</a>
+                  </span>
+                </div>
+
+
+
+
+                <div *ngIf="shift.day==='Fri'&&i===5" class="d-flex align-items-center justify-content-between col-12 mb-3">
+                  <div class="d-flex align-items-center justify-content-between col-8">
+                    <div style="position: relative; width: 40%;">
+
+
+
+               <input type="time" [(ngModel)]="shift.startTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                    <div style="position: relative; width: 40%;">
+
+               <input type="time" [(ngModel)]="shift.endTime"
+                      style="width:100%; background-color: var(--chekBG); border: 1px solid var(--icon-color); color:var(--icon-color)"/>
+
+
+                      <i class="bi bi-clock" style="position: absolute; right: 6px; pointer-events: none; color:var(--icon-color)"></i>
+                    </div>
+                  </div>
+
+                  <span class="d-flex align-items-center" style="color: #ff3131; cursor: pointer; font-size: 11px;">
+                    <i class="bi bi-x" style="font-size: 18px;"></i>
+                    <a (click)="removeShift(day, shiftIndex)">Remove shift</a>
+                  </span>
+                </div>
+
+
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Confirm availability -->
+<!-- Confirm availability -->
+<div class="d-flex col-3" style="padding-left: 20px;">
+  <div class="doctor w-100" style="height: fit-content;">
+    <span class="filter-header"><i class="bi bi-check-square" style="margin-right: 10px;"></i>Confirm Availability weeks</span>
+
+    <div class="p-3">
+      <span class="d-block pb-3">
+        <input type="checkbox" name="thisWeek" id="thisWeek" [(ngModel)]="schedules[selectedClinic].thisWeek"> This week
+      </span>
+      <span class="d-block pb-3">
+        <input type="checkbox" name="nextWeek" id="nextWeek" [(ngModel)]="schedules[selectedClinic].nextWeek"> Next week
+      </span>
+      <span class="d-block pb-3">
+        <input type="checkbox" name="nextTwoWeek" id="nextTwoWeek" [(ngModel)]="schedules[selectedClinic].nextTwoWeek"> Next two weeks
+      </span>
+      <span class="d-block pb-3">
+        <input type="checkbox" name="nextThreeWeek" id="nextThreeWeek" [(ngModel)]="schedules[selectedClinic].nextThreeWeek"> Next three weeks
+      </span>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Confirm identity button -->
+  <button type="button" class="btn btn-primary col-lg-4 col-md-6 mb-3" style="font-size: 12px;padding: 8px 50px;" (click)="onSubmit()">Confirm identity</button>
+
+</div>
+
+
+
+<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false">
+  <div class="toast-header">
+    <img src="..." class="rounded me-2" alt="...">
+    <strong class="me-auto">Bootstrap</strong>
+    <small>11 mins ago</small>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    Hello, world! This is a toast message.
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- toast test -->
+ <div
+ [ngStyle]="reviewed?{'z-index':'5','opacity':'1'}:{'z-index':'-5','opacity':'0'}"
+ class="toasttest toast align-items-center">
+   <div class="d-flex">
+     <div class="toast-body">
+       {{revMessage}}
+     </div>
+     <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+   </div>
+ </div>
+ <!-- end toast test -->

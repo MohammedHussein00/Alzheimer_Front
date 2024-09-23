@@ -1,0 +1,135 @@
+
+
+
+.logo {
+  padding: 15px 0;
+  margin: 0;
+  display: block;
+  position: relative;
+  z-index: 4;
+  background-color: #313a46;
+
+}
+.simple-text {
+text-transform: uppercase;
+padding: 5px 0;
+font-size: 16px;
+color: white;
+white-space: nowrap;
+font-weight: bold;
+line-height: 30px;
+font-family: system-ui;
+overflow: hidden;
+text-align: center;
+display: flex;
+justify-content: space-around;
+}
+.logo:after {
+content: "";
+position: absolute;
+bottom: 0;
+right: 15px;
+height: 1px;
+width: calc(100% - 30px);
+background-color: rgba(180,180,180,.3);
+}
+.logo-img img {
+width: 35px;
+position: absolute;
+}
+/* ///////////////////////////////////////// */
+.sidebar-wrapper {
+position: relative;
+height: calc(100vh - 75px);
+overflow: auto;
+padding: 0px 10px;
+z-index: 4;
+padding-bottom: 30px;
+background-color: #313a46;
+}
+.nav {
+margin-top: 20px;
+display: block;
+}
+
+.nav li a {
+border-radius: 3px;
+text-transform: capitalize;
+font-size: 13px;
+padding: 10px 15px;
+display: flex;
+color: #8391a2;
+align-items: center;
+justify-content: flex-end;
+transition: all .5s ease;
+
+}
+
+.nav li a:not(.active1):hover {
+color: #bccee4 !important;
+}
+
+.nav li a img{
+max-width: 26px;
+/* max-height: 24px; */
+padding: 2px;
+margin-right: 16px;
+transition: all 0.5s ease;
+}
+.sidebar-wrapper .nav .text {
+margin: 0;
+line-height: 30px;
+width: 65%;
+font-size: 14px;
+position: relative;
+display: block;
+height: auto;
+font-weight: 500;
+white-space: nowrap;
+padding: 0 5px;
+}
+.active1 {
+color: white!important;
+}
+.active2 {
+filter:brightness(0) invert(1);
+}
+.collapse {
+max-height: 0;
+overflow: hidden;
+transition: all 0.5s ease; /* Apply transition only when showing */
+}
+
+.collapse.show {
+max-height: 1000px; /* Adjust the value to accommodate your content height */
+transition: all 0.5s ease; /* Apply transition only when showing */
+
+}
+
+.side-nav-second-level{
+list-style: none;
+direction: rtl;
+
+}
+
+.svg1 path{
+fill: #8391a2;
+}
+.nav li a:not(.active1):hover .svg1 path{
+fill: #bccee4;
+transition: all 0.5s ease; /* Apply transition only when showing */
+
+}
+
+
+
+.nav li a.active1 .svg1 path {
+fill: white;
+}
+
+.svg1.rotate {
+transform: rotate(90deg);
+transition: all 0.5s ease; /* Apply transition only when showing */
+
+}
+

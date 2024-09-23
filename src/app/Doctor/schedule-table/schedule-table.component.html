@@ -1,0 +1,185 @@
+<div class="d-flex justify-content-between align-items-center">
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb" style="color:var(--icon-color)">
+    <li class="breadcrumb-item" style="color:var(--icon-color)">Schedule</li>
+    <li class="breadcrumb-item active" aria-current="page" style="color:var(--icon-color)">Dr: Mohammed Hussein</li>
+  </ol>
+</nav>
+
+
+<div id="carouselExampleControlsNoTouching" class="carousel slide  col-lg-4 col-md-5 " data-bs-touch="false" data-bs-interval="false"
+style="text-align: center;"
+>
+  <div class="carousel-inner" >
+    <div class="carousel-item" style="color:var(--icon-color);" [ngClass]="{'active': a === 0}" *ngFor="let clinic of data.clinics; let a=index;">
+      {{clinic.name}}
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true" style="width:10px;height:10px;border-bottom: 2px solid var(--color_1);border-left: 2px solid var(--color_1);padding: 5px;transform: rotate(45deg);background-image: none;"
+    (click)="nextClinic()"
+    ></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true" style="width:10px;height:10px;border-bottom: 2px solid var(--color_1);border-right: 2px solid var(--color_1);padding: 5px;transform: rotate(-45deg);background-image: none;"
+    (click)="previousClinic()"
+    ></span>
+  </button>
+</div>
+
+</div>
+
+<div class="container-fluid doctor">
+  <div class="row">
+    <div class="col-md-4 col-12 " style="    border-top-left-radius: 10px;background: var(--appBG);border-bottom-left-radius:10px; ">
+      <div class="d-flex flex-column m-4 text-center"  >
+        <span style="color: white;font-size: 45px;" *ngIf="selectedDate"> {{ selectedDate | date: 'd' }}</span>
+        <span style="color: white; font-size: 20px;" *ngIf="selectedDate">
+          {{ selectedDate | date: 'EEEE' }}
+        </span>
+
+
+
+
+
+
+
+
+        <div style="margin-top:50px;font-weight: 600;color:white" *ngIf="currDay.length===0">
+          <p>No shifts available for {{ dayNames[selectedDate.getDay()] }}</p>
+        </div>
+        <div  *ngFor="let timeRange of currDay; let x=index"
+        [ngStyle]="{'pointer-events': statusOfAppointment(timeRange.shiftId).statusId === 3 ? 'none' : 'auto'}"
+        class="appoinment d-flex align-items-center justify-content-center flex-column" style="padding: 25px 0;cursor: pointer;color:white;transition: all 0.5s ease;"
+        data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + x"
+
+        >
+          <span style="color: inherit;">{{ convertToTimeFormat(timeRange.startTime) }} TO {{ convertToTimeFormat(timeRange.endTime) }}</span>
+          <span *ngIf="statusOfAppointment(timeRange.shiftId).statusId===1" style="color: inherit;">{{statusOfAppointment(timeRange.shiftId).status==='In Process'?'Booked now':'Calceled'}}
+            <i style="color: inherit;" class="bi bi-lock-fill" style="transform: rotate(45deg);"></i>
+          </span>
+          <span *ngIf="statusOfAppointment(timeRange.shiftId).statusId===2" style="color: inherit;">{{statusOfAppointment(timeRange.shiftId).status==='In Process'?'Completed':'Calceled'}}
+            <i style="color: inherit;" class="bi bi-lock-fill" style="transform: rotate(45deg);"></i>
+          </span>
+          <span *ngIf="statusOfAppointment(timeRange.shiftId).statusId===3" style="color: inherit;">Not booked
+            <i style="color: inherit;" class="bi bi-unlock-fill" style="transform: rotate(45deg);"></i>
+          </span>
+
+
+        </div>
+
+        <button (click)="cancelAll()" *ngIf="appointmentsTemp.length>0" type="button" class="btn btn-primary " style="padding: 10px 20px;border: none, i !important;background-color: #fa5c7c;">Cancel all Of this Day</button>
+
+
+          <!-- Modal -->
+          <div *ngFor="let timeRange of currDay; let x=index"  class="modal fade" id="exampleModal{{x}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel"> Appoinment</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <span style="display: block;
+                  text-align: start;
+                  font-weight: 600;
+                  color: inherit;
+                  padding-bottom: 29px;">{{ convertToTimeFormat(timeRange.startTime) }} TO {{ convertToTimeFormat(timeRange.endTime) }}</span>
+
+                  <div class="row">
+                    <div class="col-3">
+                      <img class="rounded-circle" [src]="getAppointmentId(timeRange.shiftId).patientImg ? getAppointmentId(timeRange.shiftId).patientImg : 'assets/profile1.png'" width="50px" height="50px" alt="user" />
+                    </div>
+                    <div class="col-6">
+                      <p style="text-align: start;font-size: 17px;font-weight: 500;">{{getAppointmentId(timeRange.shiftId).patientName}}</p>
+                      <p style="text-align: start;font-size: 17px;font-weight: 500;">+2 {{getAppointmentId(timeRange.shiftId).patientPhone}}</p>
+                      <p style="text-align: start;font-size: 17px;font-weight: 500;">{{data.clinics[selectedClinic].examination}} L.E</p>
+                      <p style="text-align: start;font-size: 17px;font-weight: 500;">{{calculateTimeDifferenceInMinutes(timeRange.endTime,timeRange.startTime)}} Mints</p>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+
+
+                  <button routerLink="['/chat':getAppointmentId(timeRange.shiftId).patientId]" type="button" class="btn btn-primary" style="padding: 10px 20px;background-color: var(--appBG);"><i class="bi bi-chat-fill" style="font-size: 16px;color: white;cursor: pointer;" ></i> Message</button>
+                  <button type="button" class="btn btn-primary" style="padding: 10px 20px;">Ok</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+    <div class="col-md-8 col-12">
+      <div class="calendar-container">
+        <div class="d-flex justify-content-end">
+        <div class="controls">
+          <span  style="width: 10px;height: 10px;border-top: 2px solid var(--color_1);border-left: 2px solid var(--color_1);transform: rotate(-45deg);" (click)="prevYear()"></span>
+          <span>{{ currentDate | date: 'yyyy' }}</span>
+          <span style="width: 10px;height: 10px;border-top: 2px solid var(--color_1);border-right: 2px solid var(--color_1);transform: rotate(45deg);" class="next" (click)="nextYear()"></span>
+
+        </div>
+
+        </div>
+        <div class="months-header d-flex row">
+          <div class="months-header d-flex align-items-center row">
+            <div  *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; let i = index"
+                 class="col-lg-1 col-md-1"
+                 [class.activeMonth]="isActiveMonth(i)"
+                 (click)="selectMonth(i)">
+              {{ month }}
+            </div>
+          </div>
+
+          <hr style="    margin: 1rem 0;border-top: 2px solid;">
+        </div>
+
+        <div class="days-header d-flex row">
+          <div  style="width:  calc(100% / 7);color:var(--icon-color)" *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</div>
+        </div>
+
+        <div class="d-flex row pt-3">
+          <div *ngFor="let day of daysInMonth; let i = index" class="col-lg-2 col-md-3 day" style="width:  calc(100% / 7);color:var(--icon-color)"
+                [class.selected]="isSelectedDay(day)" (click)="selectDay(day)">
+            {{ day }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- toast test -->
+    <div
+    [ngStyle]="reviewed?{'z-index':'5','opacity':'1'}:{'z-index':'-5','opacity':'0'}"
+    class="toasttest toast align-items-center">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{revMessage}}
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+    <!-- end toast test -->
